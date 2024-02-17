@@ -1,5 +1,5 @@
 #include <Exwl.h>
 
 int main() {
-	exwlCreateWindow();
+	ExwlWindow* window = exwlCreateWindow();
 }

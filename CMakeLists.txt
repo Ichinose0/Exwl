@@ -16,10 +16,20 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 include_directories(include)
 
+include_directories(src/include)
+
 set(exwl_SRC
     src/window.c
+    src/native.c
+    src/win32_platform.c
+
+    src/include/internal.h
+    src/include/native.h
+    src/include/platform.h
+
     include/Exwl.h
 )
+
 project(Exwl VERSION ${exVERSION} DESCRIPTION "Extensible windowing library" LANGUAGES C)
 
 add_library(Exwl${exVERSION} SHARED ${exwl_SRC})

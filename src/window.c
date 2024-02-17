@@ -1,7 +1,6 @@
 #include <Exwl.h>
-#include <stdio.h>
+#include <native.h>
 
-
-EXWLAPI void exwlCreateWindow() {
-	printf("Create window.");
+EXWLAPI ExwlWindow* exwlCreateWindow() {
+	return _exwlCreateWindow();
 }
