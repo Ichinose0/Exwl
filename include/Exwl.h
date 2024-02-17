@@ -7,9 +7,13 @@
 
 #pragma once
 
-#define EXWLAPI __declspec(dllexport)
+typedef unsigned char ex_bool;
 
 typedef struct ExwlWindow ExwlWindow;
+
+#define EXWLAPI __declspec(dllexport)
+#define EX_FALSE 0
+#define EX_TRUE 1
 
 #ifdef _WIN32
 #define EXWL_PLATFORM_WIN32
@@ -22,6 +26,9 @@ typedef struct ExwlWindow ExwlWindow;
 extern "C" {
 #endif
 	EXWLAPI ExwlWindow* exwlCreateWindow();
+	EXWLAPI void exwlSetWindowSize(ExwlWindow* window, unsigned int width, unsigned int height);
+	EXWLAPI void exwlSetWindowTitle(ExwlWindow* window, const char* title);
+	EXWLAPI void exwlSetWindowVisible(ExwlWindow* window, ex_bool visible);
 #ifdef __cplusplus
 }
 #endif

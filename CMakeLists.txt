@@ -20,11 +20,9 @@ include_directories(src/include)
 
 set(exwl_SRC
     src/window.c
-    src/native.c
     src/win32_platform.c
 
     src/include/internal.h
-    src/include/native.h
     src/include/platform.h
 
     include/Exwl.h

@@ -13,7 +13,11 @@
 typedef struct t_Win32Handle {
 	HINSTANCE hInstance;
 	HWND hWnd;
+	MSG msg;
 } Win32Handle;
 
 ExwlWindow* CreateWindowForWin32();
+ex_bool SetWindowSizeForWin32(ExwlWindow* window, unsigned int width, unsigned int height);
+void SetWindowTitleForWin32(ExwlWindow* window, const char* title);
+void SetWindowVisibleForWin32(ExwlWindow* window, ex_bool visible);
 #endif
