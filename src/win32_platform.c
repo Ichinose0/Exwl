@@ -2,6 +2,13 @@
 #include "internal.h"
 #include <stdio.h>
 
+LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
+	if (msg == WM_DESTROY) {
+		PostQuitMessage(0);
+	}
+	return DefWindowProc(hwnd, msg, wp, lp);
+}
+
 ExwlWindow* CreateWindowForWin32() {
 	ExwlWindow window;
 
@@ -9,7 +16,7 @@ ExwlWindow* CreateWindowForWin32() {
 	WNDCLASS winc;
 
 	winc.style = CS_HREDRAW | CS_VREDRAW;
-	winc.lpfnWndProc = DefWindowProc;
+	winc.lpfnWndProc = WndProc;
 	winc.cbClsExtra = winc.cbWndExtra = 0;
 	winc.hInstance = hInstance;
 	winc.hIcon = LoadIcon(NULL, IDI_APPLICATION);
@@ -44,4 +51,14 @@ void SetWindowVisibleForWin32(ExwlWindow* window, ex_bool visible) {
 		ShowWindow(window->win32.hWnd, SW_SHOW);
 	else
 		ShowWindow(window->win32.hWnd, SW_HIDE);
+}
+
+ex_bool WaitWindowMessageForWin32(ExwlWindow* window) {
+	if (window != NULL)
+		return GetMessage(&(window->win32.msg), NULL, 0, 0);
+	else
+		return EX_FALSE;
+}
+void DispatchWindowMessageForWin32(ExwlWindow* window) {
+	DispatchMessage(&(window->win32.msg));
 }

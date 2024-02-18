@@ -20,4 +20,7 @@ ExwlWindow* CreateWindowForWin32();
 ex_bool SetWindowSizeForWin32(ExwlWindow* window, unsigned int width, unsigned int height);
 void SetWindowTitleForWin32(ExwlWindow* window, const char* title);
 void SetWindowVisibleForWin32(ExwlWindow* window, ex_bool visible);
+
+ex_bool WaitWindowMessageForWin32(ExwlWindow* window);
+void DispatchWindowMessageForWin32(ExwlWindow* window);
 #endif

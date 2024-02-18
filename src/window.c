@@ -31,3 +31,18 @@ EXWLAPI void exwlSetWindowVisible(ExwlWindow* window, ex_bool visible) {
 
 #endif
 }
+
+EXWLAPI ex_bool exwlWaitWindowMessage(ExwlWindow* window) {
+#ifdef EXWL_PLATFORM_WIN32
+	return WaitWindowMessageForWin32(window);
+#else
+	return EX_FALSE;
+#endif
+}
+EXWLAPI void exwlDispatchWindowMessage(ExwlWindow* window) {
+#ifdef EXWL_PLATFORM_WIN32
+	DispatchWindowMessageForWin32(window);
+#else
+
+#endif
+}

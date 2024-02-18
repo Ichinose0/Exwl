@@ -26,9 +26,12 @@ typedef struct ExwlWindow ExwlWindow;
 extern "C" {
 #endif
 	EXWLAPI ExwlWindow* exwlCreateWindow();
-	EXWLAPI void exwlSetWindowSize(ExwlWindow* window, unsigned int width, unsigned int height);
+	EXWLAPI ex_bool exwlSetWindowSize(ExwlWindow* window, unsigned int width, unsigned int height);
 	EXWLAPI void exwlSetWindowTitle(ExwlWindow* window, const char* title);
 	EXWLAPI void exwlSetWindowVisible(ExwlWindow* window, ex_bool visible);
+
+	EXWLAPI ex_bool exwlWaitWindowMessage(ExwlWindow* window);
+	EXWLAPI void exwlDispatchWindowMessage(ExwlWindow* window);
 #ifdef __cplusplus
 }
 #endif

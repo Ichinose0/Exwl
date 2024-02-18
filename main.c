@@ -6,7 +6,7 @@ int main() {
 
 	exwlSetWindowTitle(window, "Exwl Window!");
 
-	while (1) {
-
+	while (exwlWaitWindowMessage(window)) {
+		exwlDispatchWindowMessage(window);
 	};
 }
