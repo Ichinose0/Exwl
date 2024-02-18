@@ -27,7 +27,7 @@ ExwlWindow* CreateWindowForWin32() {
 
 	if (!RegisterClass(&winc)) return NULL;
 
-	HWND hWnd = CreateWindow(TEXT("DEF"), TEXT("Hello, world"), WS_VISIBLE|WS_OVERLAPPEDWINDOW, 0, 0, 800, 600, NULL, NULL, hInstance, NULL);
+	HWND hWnd = CreateWindow(TEXT("DEF"), TEXT("Hello, world"), WS_OVERLAPPEDWINDOW, 0, 0, 800, 600, NULL, NULL, hInstance, NULL);
 
 	window->win32.hInstance = hInstance;
 	window->win32.hWnd = hWnd;
@@ -47,6 +47,13 @@ void SetWindowVisibleForWin32(ExwlWindow* window, ex_bool visible) {
 		ShowWindow(window->win32.hWnd, SW_SHOW);
 	else
 		ShowWindow(window->win32.hWnd, SW_HIDE);
+}
+
+void SetWindowMaximizeForWin32(ExwlWindow* window) {
+	ShowWindow(window->win32.hWnd, SW_MAXIMIZE);
+}
+void SetWindowMinimizeForWin32(ExwlWindow* window) {
+	ShowWindow(window->win32.hWnd, SW_MINIMIZE);
 }
 
 ex_bool WaitWindowMessageForWin32(ExwlWindow* window) {

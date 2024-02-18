@@ -34,6 +34,21 @@ EXWLAPI void exwlSetWindowVisible(ExwlWindow* window, ex_bool visible) {
 #endif
 }
 
+EXWLAPI void exwlSetWindowMaximize(ExwlWindow* window) {
+#ifdef EXWL_PLATFORM_WIN32
+	SetWindowMaximizeForWin32(window);
+#else
+
+#endif
+}
+EXWLAPI void exwlSetWindowMinimize(ExwlWindow* window) {
+#ifdef EXWL_PLATFORM_WIN32
+	SetWindowMinimizeForWin32(window);
+#else
+
+#endif
+}
+
 EXWLAPI ex_bool exwlWaitWindowMessage(ExwlWindow* window) {
 #ifdef EXWL_PLATFORM_WIN32
 	return WaitWindowMessageForWin32(window);

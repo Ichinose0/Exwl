@@ -12,6 +12,7 @@ typedef unsigned char ex_bool;
 typedef struct ExwlWindow ExwlWindow;
 
 #define EXWLAPI __declspec(dllexport)
+
 #define EX_FALSE 0
 #define EX_TRUE 1
 
@@ -26,9 +27,12 @@ typedef struct ExwlWindow ExwlWindow;
 extern "C" {
 #endif
 	EXWLAPI ExwlWindow* exwlCreateWindow();
+
 	EXWLAPI ex_bool exwlSetWindowSize(ExwlWindow* window, unsigned int width, unsigned int height);
 	EXWLAPI void exwlSetWindowTitle(ExwlWindow* window, const char* title);
 	EXWLAPI void exwlSetWindowVisible(ExwlWindow* window, ex_bool visible);
+	EXWLAPI void exwlSetWindowMaximize(ExwlWindow* window);
+	EXWLAPI void exwlSetWindowMinimize(ExwlWindow* window);
 
 	EXWLAPI ex_bool exwlWaitWindowMessage(ExwlWindow* window);
 	EXWLAPI void exwlDispatchWindowMessage(ExwlWindow* window);
