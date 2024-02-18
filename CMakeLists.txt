@@ -19,13 +19,15 @@ include_directories(include)
 include_directories(src/include)
 
 set(exwl_SRC
+    src/native.c
     src/window.c
     src/win32_platform.c
 
     src/include/internal.h
     src/include/platform.h
 
-    include/Exwl.h
+    include/exwl/Exwl.h
+    include/exwl/native.h
 )
 
 project(Exwl VERSION ${exVERSION} DESCRIPTION "Extensible windowing library" LANGUAGES C)
