@@ -1,5 +1,7 @@
 #include <Exwl.h>
 #include <platform.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 EXWLAPI ExwlWindow* exwlCreateWindow() {
 #ifdef EXWL_PLATFORM_WIN32
@@ -45,4 +47,8 @@ EXWLAPI void exwlDispatchWindowMessage(ExwlWindow* window) {
 #else
 
 #endif
+}
+EXWLAPI void exwlDestroyWindow(ExwlWindow* window) {
+	_exwlDestroyWindow(window);
+	free(window);
 }

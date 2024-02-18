@@ -32,6 +32,7 @@ extern "C" {
 
 	EXWLAPI ex_bool exwlWaitWindowMessage(ExwlWindow* window);
 	EXWLAPI void exwlDispatchWindowMessage(ExwlWindow* window);
+	EXWLAPI void exwlDestroyWindow(ExwlWindow* window);
 #ifdef __cplusplus
 }
 #endif

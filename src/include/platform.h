@@ -23,4 +23,5 @@ void SetWindowVisibleForWin32(ExwlWindow* window, ex_bool visible);
 
 ex_bool WaitWindowMessageForWin32(ExwlWindow* window);
 void DispatchWindowMessageForWin32(ExwlWindow* window);
+void _exwlDestroyWindow(ExwlWindow* window);
 #endif

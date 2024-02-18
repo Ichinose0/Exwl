@@ -1,5 +1,6 @@
 #include <Exwl.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int main() {
 	ExwlWindow* window = exwlCreateWindow();
@@ -9,4 +10,6 @@ int main() {
 	while (exwlWaitWindowMessage(window)) {
 		exwlDispatchWindowMessage(window);
 	};
+
+	exwlDestroyWindow(window);
 }
