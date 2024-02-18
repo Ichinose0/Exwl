@@ -2,6 +2,25 @@
 #include "internal.h"
 #include <stdio.h>
 
+DWORD ExtractWindowStyle(unsigned int style) {
+	DWORD s = WS_VISIBLE;
+	if (style & EXWL_WINDOW_FRAME) {
+		s |= WS_BORDER | WS_THICKFRAME;
+	}
+	if (style & EXWL_WINDOW_CAPTION) {
+		s |= WS_CAPTION;
+	}
+	if (style & EXWL_WINDOW_CLOSEBOX)
+		s |= WS_SYSMENU;
+	if (style & EXWL_WINDOW_MAXIMIZEBOX)
+		s |= WS_MAXIMIZEBOX;
+	if (style & EXWL_WINDOW_MINIMIZEBOX) {
+		s |= WS_MINIMIZEBOX;
+	}
+
+	return s;
+}
+
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
 	if (msg == WM_DESTROY) {
 		PostQuitMessage(0);
@@ -54,6 +73,10 @@ void SetWindowMaximizeForWin32(ExwlWindow* window) {
 }
 void SetWindowMinimizeForWin32(ExwlWindow* window) {
 	ShowWindow(window->win32.hWnd, SW_MINIMIZE);
+}
+void SetWindowStyleForWin32(ExwlWindow* window, unsigned int style) {
+	SetWindowLong(window->win32.hWnd,GWL_STYLE, ExtractWindowStyle(style));
+	SetWindowPos(window->win32.hWnd, NULL, 0, 0, 0, 0, (SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE | SWP_FRAMECHANGED));
 }
 
 ex_bool WaitWindowMessageForWin32(ExwlWindow* window) {

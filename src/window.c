@@ -48,6 +48,13 @@ EXWLAPI void exwlSetWindowMinimize(ExwlWindow* window) {
 
 #endif
 }
+EXWLAPI void exwlSetWindowStyle(ExwlWindow* window, unsigned int style) {
+#ifdef EXWL_PLATFORM_WIN32
+	SetWindowStyleForWin32(window,style);
+#else
+
+#endif
+}
 
 EXWLAPI ex_bool exwlWaitWindowMessage(ExwlWindow* window) {
 #ifdef EXWL_PLATFORM_WIN32

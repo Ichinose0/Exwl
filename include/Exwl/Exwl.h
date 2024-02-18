@@ -23,6 +23,15 @@ typedef struct ExwlWindow ExwlWindow;
 #define EXWL_PLATFORM_LINUX
 #endif
 
+#define EXWL_NONE 0x0;
+#define EXWL_WINDOW_FRAME 0x01
+#define EXWL_WINDOW_CAPTION 0x02
+#define EXWL_WINDOW_CLOSEBOX 0x04
+#define EXWL_WINDOW_MAXIMIZEBOX 0x08
+#define EXWL_WINDOW_MINIMIZEBOX 0x010
+
+#define EXWL_WINDOW_COMPLETE EXWL_WINDOW_FRAME|EXWL_WINDOW_CAPTION|EXWL_WINDOW_CLOSEBOX|EXWL_WINDOW_MAXIMIZEBOX|EXWL_WINDOW_MINIMIZEBOX
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -33,6 +42,7 @@ extern "C" {
 	EXWLAPI void exwlSetWindowVisible(ExwlWindow* window, ex_bool visible);
 	EXWLAPI void exwlSetWindowMaximize(ExwlWindow* window);
 	EXWLAPI void exwlSetWindowMinimize(ExwlWindow* window);
+	EXWLAPI void exwlSetWindowStyle(ExwlWindow* window, unsigned int style);
 
 	EXWLAPI ex_bool exwlWaitWindowMessage(ExwlWindow* window);
 	EXWLAPI void exwlDispatchWindowMessage(ExwlWindow* window);

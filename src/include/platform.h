@@ -22,6 +22,7 @@ void SetWindowTitleForWin32(ExwlWindow* window, const char* title);
 void SetWindowVisibleForWin32(ExwlWindow* window, ex_bool visible);
 void SetWindowMaximizeForWin32(ExwlWindow* window);
 void SetWindowMinimizeForWin32(ExwlWindow* window);
+void SetWindowStyleForWin32(ExwlWindow* window, unsigned int style);
 
 ex_bool WaitWindowMessageForWin32(ExwlWindow* window);
 void DispatchWindowMessageForWin32(ExwlWindow* window);
