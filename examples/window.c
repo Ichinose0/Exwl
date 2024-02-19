@@ -8,7 +8,7 @@ int main() {
 	unsigned int style = EXWL_WINDOW_COMPLETE;
 
 	exwlSetWindowTitle(window, "Exwl Window!");
-	exwlSetWindowStyle(NULL,style);
+	exwlSetWindowStyle(window,style);
 	exwlSetWindowVisible(window, EX_TRUE);
 
 	while (exwlWaitWindowMessage(window)) {
