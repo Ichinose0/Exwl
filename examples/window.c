@@ -11,6 +11,11 @@ int main() {
 	exwlSetWindowStyle(window,style);
 	exwlSetWindowVisible(window, EX_TRUE);
 
+	WindowGeometry geometry;
+	exwlGetWindowGeometry(window, &geometry);
+
+	printf("Width: %d\nHeight: %d\nX: %d\nY: %d", geometry.width,geometry.height,geometry.x,geometry.y);
+
 	while (exwlWaitWindowMessage(window)) {
 		exwlDispatchWindowMessage(window);
 	};

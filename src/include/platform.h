@@ -23,6 +23,9 @@ void SetWindowVisibleForWin32(ExwlWindow* window, ex_bool visible);
 void SetWindowMaximizeForWin32(ExwlWindow* window);
 void SetWindowMinimizeForWin32(ExwlWindow* window);
 void SetWindowStyleForWin32(ExwlWindow* window, unsigned int style);
+/// The function names are prefixed with an underscore to prevent duplication with Windows API function names.
+ex_bool _SetForegroundWindowForWin32(ExwlWindow* window);
+ex_bool GetWindowGeometryForWin32(ExwlWindow* window, WindowGeometry* geometry);
 
 ex_bool WaitWindowMessageForWin32(ExwlWindow* window);
 void DispatchWindowMessageForWin32(ExwlWindow* window);

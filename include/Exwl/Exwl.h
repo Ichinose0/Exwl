@@ -32,6 +32,13 @@ typedef struct ExwlWindow ExwlWindow;
 
 #define EXWL_WINDOW_COMPLETE EXWL_WINDOW_FRAME|EXWL_WINDOW_CAPTION|EXWL_WINDOW_CLOSEBOX|EXWL_WINDOW_MAXIMIZEBOX|EXWL_WINDOW_MINIMIZEBOX
 
+typedef struct WindowGeometry {
+	unsigned int x;
+	unsigned int y;
+	unsigned int width;
+	unsigned int height;
+} WindowGeometry;
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -43,6 +50,8 @@ extern "C" {
 	EXWLAPI void exwlSetWindowMaximize(ExwlWindow* window);
 	EXWLAPI void exwlSetWindowMinimize(ExwlWindow* window);
 	EXWLAPI void exwlSetWindowStyle(ExwlWindow* window, unsigned int style);
+	EXWLAPI ex_bool exwlSetForegroundWindow(ExwlWindow* window);
+	EXWLAPI ex_bool exwlGetWindowGeometry(ExwlWindow* window, WindowGeometry* geometry);
 
 	EXWLAPI ex_bool exwlWaitWindowMessage(ExwlWindow* window);
 	EXWLAPI void exwlDispatchWindowMessage(ExwlWindow* window);

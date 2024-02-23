@@ -79,6 +79,27 @@ void SetWindowStyleForWin32(ExwlWindow* window, unsigned int style) {
 	SetWindowPos(window->win32.hWnd, NULL, 0, 0, 0, 0, (SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE | SWP_FRAMECHANGED));
 }
 
+ex_bool _SetForegroundWindowForWin32(ExwlWindow* window) {
+	return SetForegroundWindow(window->win32.hWnd);
+}
+
+ex_bool GetWindowGeometryForWin32(ExwlWindow* window, WindowGeometry* geometry) {
+	WINDOWINFO info;
+	info.cbSize = sizeof(WINDOWINFO);
+	if (!GetWindowInfo(window->win32.hWnd, &info))
+		return EX_FALSE;
+
+	// Width
+	geometry->width = info.rcWindow.right - info.rcWindow.left;
+	// Height
+	geometry->height = info.rcWindow.bottom - info.rcWindow.top;
+	// X
+	geometry->x = info.rcWindow.left;
+	// Y
+	geometry->y = info.rcWindow.top;
+	return EX_TRUE;
+}
+
 ex_bool WaitWindowMessageForWin32(ExwlWindow* window) {
 	if (window != NULL)
 		return GetMessage(&(window->win32.msg), NULL, 0, 0);

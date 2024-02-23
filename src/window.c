@@ -63,6 +63,24 @@ EXWLAPI void exwlSetWindowStyle(ExwlWindow* window, unsigned int style) {
 #endif
 }
 
+EXWLAPI ex_bool exwlSetForegroundWindow(ExwlWindow* window) {
+	assert(window != NULL);
+#ifdef EXWL_PLATFORM_WIN32
+	return _SetForegroundWindowForWin32(window);
+#else
+
+#endif
+}
+
+EXWLAPI ex_bool exwlGetWindowGeometry(ExwlWindow* window, WindowGeometry* geometry) {
+	assert(window != NULL);
+#ifdef EXWL_PLATFORM_WIN32
+	GetWindowGeometryForWin32(window,geometry);
+#else
+
+#endif
+}
+
 EXWLAPI ex_bool exwlWaitWindowMessage(ExwlWindow* window) {
 	assert(window != NULL);
 #ifdef EXWL_PLATFORM_WIN32
