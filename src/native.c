@@ -1,5 +1,5 @@
-#include <exwl/Exwl.h>
-#include <exwl/native.h>
+#include <Exwl/Exwl.h>
+#include <Exwl/native.h>
 #include "internal.h"
 #include <assert.h>
 

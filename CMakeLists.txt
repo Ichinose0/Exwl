@@ -26,8 +26,8 @@ set(exwl_SRC
     src/include/internal.h
     src/include/platform.h
 
-    include/exwl/Exwl.h
-    include/exwl/native.h
+    include/Exwl/Exwl.h
+    include/Exwl/native.h
 )
 
 project(Exwl VERSION ${exVERSION} DESCRIPTION "Extensible windowing library" LANGUAGES C CXX)

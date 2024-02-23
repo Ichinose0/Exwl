@@ -1,10 +1,13 @@
-#include <exwl/Exwl.h>
+#include <Exwl/Exwl.h>
 #include <platform.h>
 #include <stdio.h>
 #include <assert.h>
 #include <stdlib.h>
 
 EXWLAPI ExwlWindow* exwlCreateWindow() {
+#ifdef EXWL_PLATFORM_LINUX
+	return CreateWindowForX11();
+#endif
 #ifdef EXWL_PLATFORM_WIN32
 	return CreateWindowForWin32();
 #else

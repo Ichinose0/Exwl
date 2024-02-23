@@ -1,4 +1,4 @@
-#include <exwl/Exwl.h>
+#include <Exwl/Exwl.h>
 #include "internal.h"
 #include <stdio.h>
 

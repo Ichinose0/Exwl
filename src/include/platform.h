@@ -31,3 +31,7 @@ ex_bool WaitWindowMessageForWin32(ExwlWindow* window);
 void DispatchWindowMessageForWin32(ExwlWindow* window);
 void _exwlDestroyWindow(ExwlWindow* window);
 #endif
+
+#ifdef EXWL_PLATFORM_LINUX
+ExwlWindow* CreateWindowForX11();
+#endif
