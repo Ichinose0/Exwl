@@ -2,6 +2,7 @@
 #include <Exwl/native.h>
 #include "internal.h"
 #include <assert.h>
+#include <stddef.h>
 
 EXWLAPI void* exwlGetHwndOfWindow(ExwlWindow* window) {
 	assert(window != NULL);

@@ -1,4 +1,6 @@
+#define EXWL_PLATFORM_WIN32
 #include <Exwl/Exwl.h>
+#include <stdlib.h>
 #include "internal.h"
 #include <stdio.h>
 
@@ -113,3 +115,4 @@ void DispatchWindowMessageForWin32(ExwlWindow* window) {
 void _exwlDestroyWindow(ExwlWindow* window) {
 	DestroyWindow(window->win32.hWnd);
 }
+#endif

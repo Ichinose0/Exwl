@@ -22,6 +22,7 @@ set(exwl_SRC
     src/native.c
     src/window.c
     src/win32_platform.c
+    src/x11_platform.c
 
     src/include/internal.h
     src/include/platform.h

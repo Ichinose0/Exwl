@@ -11,16 +11,14 @@ typedef unsigned char ex_bool;
 
 typedef struct ExwlWindow ExwlWindow;
 
-#define EXWLAPI __declspec(dllexport)
-
 #define EX_FALSE 0
 #define EX_TRUE 1
 
 #ifdef _WIN32
 #define EXWL_PLATFORM_WIN32
-#endif
-#ifdef _LINUX
-#define EXWL_PLATFORM_LINUX
+#define EXWLAPI __declspec(dllexport)
+#elif
+#define EXWLAPI  
 #endif
 
 #define EXWL_NONE 0x0;
