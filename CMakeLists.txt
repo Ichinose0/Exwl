@@ -30,11 +30,13 @@ set(exwl_SRC
     include/exwl/native.h
 )
 
-project(Exwl VERSION ${exVERSION} DESCRIPTION "Extensible windowing library" LANGUAGES C)
+project(Exwl VERSION ${exVERSION} DESCRIPTION "Extensible windowing library" LANGUAGES C CXX)
 
 add_library(Exwl${exVERSION} SHARED ${exwl_SRC})
 add_executable(window examples/window.c)
+add_executable(cppsample examples/cppsample.cpp)
 
 target_link_libraries(window Exwl${exVERSION})
+target_link_libraries(cppsample Exwl${exVERSION})
 
 target_include_directories(Exwl${exVERSION} INTERFACE ./include)

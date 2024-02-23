@@ -57,7 +57,7 @@ ex_bool SetWindowSizeForWin32(ExwlWindow* window, unsigned int width, unsigned i
 	return MoveWindow(window->win32.hWnd,0,0,(int)width,(int)height,0);
 }
 
-void SetWindowTitleForWin32(ExwlWindow* window, const char* title) {
+void SetWindowTitleForWin32(ExwlWindow* window, char* title) {
 	SetWindowText(window->win32.hWnd, title);
 }
 

@@ -45,7 +45,7 @@ extern "C" {
 	EXWLAPI ExwlWindow* exwlCreateWindow();
 
 	EXWLAPI ex_bool exwlSetWindowSize(ExwlWindow* window, unsigned int width, unsigned int height);
-	EXWLAPI void exwlSetWindowTitle(ExwlWindow* window, const char* title);
+	EXWLAPI void exwlSetWindowTitle(ExwlWindow* window, char* title);
 	EXWLAPI void exwlSetWindowVisible(ExwlWindow* window, ex_bool visible);
 	EXWLAPI void exwlSetWindowMaximize(ExwlWindow* window);
 	EXWLAPI void exwlSetWindowMinimize(ExwlWindow* window);
@@ -58,4 +58,59 @@ extern "C" {
 	EXWLAPI void exwlDestroyWindow(ExwlWindow* window);
 #ifdef __cplusplus
 }
+#endif
+
+// Interface for C++
+
+#ifdef __cplusplus
+class Window {
+private:
+	ExwlWindow* window;
+public:
+	Window() {
+		auto w = exwlCreateWindow();
+		window = w;
+	}
+	Window(char* title) {
+		auto w = exwlCreateWindow();
+		exwlSetWindowTitle(w, title);
+		window = w;
+	}
+	bool setForeground() {
+		return exwlSetForegroundWindow(window);
+	}
+	void setMaximize() {
+		exwlSetWindowMaximize(this->window);
+	}
+	void setMinimize() {
+		exwlSetWindowMinimize(this->window);
+	}
+	void setVisible(bool visible) {
+		exwlSetWindowVisible(this->window, visible);
+	}
+	void setSize(unsigned int width, unsigned int height) {
+		exwlSetWindowSize(this->window, width, height);
+	}
+	void setStyle(unsigned int style) {
+		exwlSetWindowStyle(this->window, style);
+	}
+	void setTitle(char* title) {
+		exwlSetWindowTitle(this->window,title);
+	}
+	bool getWindowGeometry(WindowGeometry* geometry) {
+		return exwlGetWindowGeometry(this->window, geometry);
+	}
+	bool waitWindowMessage() {
+		return exwlWaitWindowMessage(this->window);
+	}
+
+	void dispatchWindowMessage() {
+		exwlDispatchWindowMessage(this->window);
+	}
+
+
+	~Window() {
+		exwlDestroyWindow(this->window);
+	}
+};
 #endif

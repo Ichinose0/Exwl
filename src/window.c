@@ -21,7 +21,7 @@ EXWLAPI ex_bool exwlSetWindowSize(ExwlWindow* window, unsigned int width, unsign
 #endif
 }
 
-EXWLAPI void exwlSetWindowTitle(ExwlWindow* window, const char* title) {
+EXWLAPI void exwlSetWindowTitle(ExwlWindow* window, char* title) {
 	assert(window != NULL);
 #ifdef EXWL_PLATFORM_WIN32
 	SetWindowTitleForWin32(window,title);
@@ -75,9 +75,9 @@ EXWLAPI ex_bool exwlSetForegroundWindow(ExwlWindow* window) {
 EXWLAPI ex_bool exwlGetWindowGeometry(ExwlWindow* window, WindowGeometry* geometry) {
 	assert(window != NULL);
 #ifdef EXWL_PLATFORM_WIN32
-	GetWindowGeometryForWin32(window,geometry);
+	return GetWindowGeometryForWin32(window,geometry);
 #else
-
+	return EX_FALSE;
 #endif
 }
 

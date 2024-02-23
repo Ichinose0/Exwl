@@ -18,7 +18,7 @@ typedef struct t_Win32Handle {
 
 ExwlWindow* CreateWindowForWin32();
 ex_bool SetWindowSizeForWin32(ExwlWindow* window, unsigned int width, unsigned int height);
-void SetWindowTitleForWin32(ExwlWindow* window, const char* title);
+void SetWindowTitleForWin32(ExwlWindow* window, char* title);
 void SetWindowVisibleForWin32(ExwlWindow* window, ex_bool visible);
 void SetWindowMaximizeForWin32(ExwlWindow* window);
 void SetWindowMinimizeForWin32(ExwlWindow* window);
