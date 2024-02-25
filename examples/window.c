@@ -1,4 +1,4 @@
-#include <exwl/Exwl.h>
+#include <Exwl/Exwl.h>
 #include <stdio.h>
 #include <stdlib.h>
 

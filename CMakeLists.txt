@@ -38,6 +38,19 @@ add_library(Exwl${exVERSION} SHARED ${exwl_SRC})
 add_executable(window examples/window.c)
 add_executable(cppsample examples/cppsample.cpp)
 
+find_package(X11 REQUIRED)
+
+# Check if X11 was found
+if (X11_FOUND)
+    # Include directories
+    include_directories(${X11_INCLUDE_DIR})
+    
+    # Link X11 library
+    target_link_libraries(Exwl${exVERSION} ${X11_LIBRARIES})
+else()
+    message(FATAL_ERROR "X11 library not found")
+endif()
+
 target_link_libraries(window Exwl${exVERSION})
 target_link_libraries(cppsample Exwl${exVERSION})
 

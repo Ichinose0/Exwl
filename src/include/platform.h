@@ -7,7 +7,9 @@
 
 #pragma once
 
-#ifdef EXWL_PLATFORM_WIN32
+void _exwlDestroyWindow(ExwlWindow* window);
+
+#ifdef _WIN32
 #include <Windows.h>
 
 typedef struct t_Win32Handle {
@@ -33,9 +35,15 @@ ex_bool GetWindowGeometryForWin32(ExwlWindow* window, WindowGeometry* geometry);
 
 ex_bool WaitWindowMessageForWin32(ExwlWindow* window);
 void DispatchWindowMessageForWin32(ExwlWindow* window);
-void _exwlDestroyWindow(ExwlWindow* window);
 #endif
 
 #ifdef EXWL_PLATFORM_LINUX
+#include <X11/Xlib.h>
+#include <X11/Xatom.h>
+
+typedef struct t_X11Handle {
+	Display* display;
+	Window window;
+} X11Handle;
 ExwlWindow* CreateWindowForX11();
 #endif

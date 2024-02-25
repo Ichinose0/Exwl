@@ -16,11 +16,14 @@ typedef struct ExwlWindow ExwlWindow;
 #define EX_FALSE 0
 #define EX_TRUE 1
 
-#ifdef _WIN32
+#if defined(_WIN32)
 #define EXWL_PLATFORM_WIN32
 #define EXWLAPI __declspec(dllexport)
-#elif
-#define EXWLAPI  
+#elif defined(__linux__)
+#define EXWL_PLATFORM_LINUX
+#define EXWLAPI
+#else
+#define EXWLAPI
 #endif
 
 #define EXWL_NONE 0x0;
