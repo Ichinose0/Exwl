@@ -8,6 +8,8 @@
 #pragma once
 
 typedef unsigned char ex_bool;
+typedef unsigned int uint;
+typedef uint WindowStyle;
 
 typedef struct ExwlWindow ExwlWindow;
 
@@ -24,33 +26,42 @@ typedef struct ExwlWindow ExwlWindow;
 #define EXWL_NONE 0x0;
 #define EXWL_WINDOW_FRAME 0x01
 #define EXWL_WINDOW_CAPTION 0x02
-#define EXWL_WINDOW_CLOSEBOX 0x04
-#define EXWL_WINDOW_MAXIMIZEBOX 0x08
-#define EXWL_WINDOW_MINIMIZEBOX 0x010
+#define EXWL_WINDOW_CLOSABLE 0x04
+#define EXWL_WINDOW_MAXIMIZABLE 0x08
+#define EXWL_WINDOW_MINIMIZABLE 0x010
 
-#define EXWL_WINDOW_COMPLETE EXWL_WINDOW_FRAME|EXWL_WINDOW_CAPTION|EXWL_WINDOW_CLOSEBOX|EXWL_WINDOW_MAXIMIZEBOX|EXWL_WINDOW_MINIMIZEBOX
+#define EXWL_WINDOW_COMPLETE EXWL_WINDOW_FRAME|EXWL_WINDOW_CAPTION|EXWL_WINDOW_CLOSABLE|EXWL_WINDOW_MAXIMIZABLE|EXWL_WINDOW_MINIMIZABLE
 
 typedef struct WindowGeometry {
-	unsigned int x;
-	unsigned int y;
-	unsigned int width;
-	unsigned int height;
+	uint x;
+	uint y;
+	uint width;
+	uint height;
 } WindowGeometry;
+
+typedef struct WindowDescriptor {
+	WindowGeometry geometry;
+	WindowStyle style;
+} WindowDescriptor;
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 	EXWLAPI ExwlWindow* exwlCreateWindow();
+	EXWLAPI ExwlWindow* exwlCreateWindowFromDescriptor(WindowDescriptor descriptor);
 
-	EXWLAPI ex_bool exwlSetWindowSize(ExwlWindow* window, unsigned int width, unsigned int height);
+	EXWLAPI void exwlDefaultWindowGeometry(WindowGeometry* geometry);
+
+	EXWLAPI ex_bool exwlSetWindowSize(ExwlWindow* window, uint width, uint height);
+	EXWLAPI ex_bool exwlSetWindowPosition(ExwlWindow* window, uint x, uint y);
 	EXWLAPI void exwlSetWindowTitle(ExwlWindow* window, char* title);
 	EXWLAPI void exwlSetWindowVisible(ExwlWindow* window, ex_bool visible);
 	EXWLAPI void exwlSetWindowMaximize(ExwlWindow* window);
 	EXWLAPI void exwlSetWindowMinimize(ExwlWindow* window);
-	EXWLAPI void exwlSetWindowStyle(ExwlWindow* window, unsigned int style);
+	EXWLAPI void exwlSetWindowStyle(ExwlWindow* window, WindowStyle style);
 	EXWLAPI ex_bool exwlSetForegroundWindow(ExwlWindow* window);
 	EXWLAPI ex_bool exwlGetWindowGeometry(ExwlWindow* window, WindowGeometry* geometry);
-
+	
 	EXWLAPI ex_bool exwlWaitWindowMessage(ExwlWindow* window);
 	EXWLAPI void exwlDispatchWindowMessage(ExwlWindow* window);
 	EXWLAPI void exwlDestroyWindow(ExwlWindow* window);

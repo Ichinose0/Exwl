@@ -19,6 +19,7 @@ include_directories(include)
 include_directories(src/include)
 
 set(exwl_SRC
+    src/general.c
     src/native.c
     src/window.c
     src/win32_platform.c

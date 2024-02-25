@@ -1,4 +1,4 @@
-#define EXWL_PLATFORM_WIN32
+#ifdef _WIN32
 #include <Exwl/Exwl.h>
 #include <stdlib.h>
 #include "internal.h"
@@ -12,11 +12,11 @@ DWORD ExtractWindowStyle(unsigned int style) {
 	if (style & EXWL_WINDOW_CAPTION) {
 		s |= WS_CAPTION;
 	}
-	if (style & EXWL_WINDOW_CLOSEBOX)
+	if (style & EXWL_WINDOW_CLOSABLE)
 		s |= WS_SYSMENU;
-	if (style & EXWL_WINDOW_MAXIMIZEBOX)
+	if (style & EXWL_WINDOW_MAXIMIZABLE)
 		s |= WS_MAXIMIZEBOX;
-	if (style & EXWL_WINDOW_MINIMIZEBOX) {
+	if (style & EXWL_WINDOW_MINIMIZABLE) {
 		s |= WS_MINIMIZEBOX;
 	}
 
@@ -55,8 +55,22 @@ ExwlWindow* CreateWindowForWin32() {
 	return window;
 }
 
+void DefaultWindowGeometryForWin32(WindowGeometry* geometry) {
+	int width = GetSystemMetrics(SM_CXSCREEN)*1.25;
+	int height = GetSystemMetrics(SM_CYSCREEN)*1.25;
+
+	geometry->width = width / 2;
+	geometry->height = height / 2;
+	geometry->x = width/geometry->width;
+	geometry->y = width/geometry->height;
+}
+
 ex_bool SetWindowSizeForWin32(ExwlWindow* window, unsigned int width, unsigned int height) {
 	return MoveWindow(window->win32.hWnd,0,0,(int)width,(int)height,0);
+}
+
+ex_bool SetWindowPositionForWin32(ExwlWindow* window, uint x, uint y) {
+	return SetWindowPos(window->win32.hWnd, NULL, x,y, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 }
 
 void SetWindowTitleForWin32(ExwlWindow* window, char* title) {

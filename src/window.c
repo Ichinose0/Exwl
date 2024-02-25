@@ -16,10 +16,29 @@ EXWLAPI ExwlWindow* exwlCreateWindow() {
 #endif
 }
 
+EXWLAPI ExwlWindow* exwlCreateWindowFromDescriptor(WindowDescriptor descriptor) {
+	ExwlWindow* window = exwlCreateWindow();
+	if (window == NULL)
+		return NULL;
+	exwlSetWindowStyle(window, descriptor.style);
+	//exwlSetWindowSize(window, descriptor.geometry.width, descriptor.geometry.height);
+	exwlSetWindowPosition(window, descriptor.geometry.x, descriptor.geometry.y);
+	return window;
+}
+
 EXWLAPI ex_bool exwlSetWindowSize(ExwlWindow* window, unsigned int width, unsigned int height) {
 	assert(window != NULL);
 #ifdef EXWL_PLATFORM_WIN32
 	return SetWindowSizeForWin32(window, width, height);
+#else
+	return EX_FALSE;
+#endif
+}
+
+EXWLAPI ex_bool exwlSetWindowPosition(ExwlWindow* window, uint x, uint y) {
+	assert(window != NULL);
+#ifdef EXWL_PLATFORM_WIN32
+	return SetWindowPositionForWin32(window, x, y);
 #else
 	return EX_FALSE;
 #endif
