@@ -41,6 +41,33 @@ ExwlWindow* CreateWindowForX11() {
 	return window;
 }
 
+void DefaultWindowGeometryForX11(WindowGeometry* geometry) {
+
+}
+
+ex_bool SetWindowSizeForX11(ExwlWindow* window, uint width, uint height) {
+
+}
+ex_bool SetWindowPositionForX11(ExwlWindow* window, uint x, uint y) {
+
+}
+void SetWindowTitleForX11(ExwlWindow* window, char* title) {
+    XStoreName(window->x11.display, window->x11.window, title);
+}
+void SetWindowVisibleForX11(ExwlWindow* window, ex_bool visible) {
+    if (visible)
+        XMapWindow(window->x11.display, window->x11.window);
+    else
+        XUnmapWindow(window->x11.display, window->x11.window);
+}
+void SetWindowMaximizeForX11(ExwlWindow* window) {
+
+}
+void SetWindowMinimizeForX11(ExwlWindow* window) {
+
+}
+
 void _exwlDestroyWindow(ExwlWindow* window) {
+    XDestroyWindow(window->x11.display, window->x11.window);
 	XCloseDisplay(window->x11.display);
 }

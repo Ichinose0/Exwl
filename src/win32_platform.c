@@ -5,7 +5,6 @@
 // Created:     2024-02-17
 /////////////////////////////////////////////////////////////////////////////
 
-#ifdef _WIN32
 #include <Exwl/Exwl.h>
 #include <stdlib.h>
 #include "internal.h"
@@ -136,4 +135,3 @@ void DispatchWindowMessageForWin32(ExwlWindow* window) {
 void _exwlDestroyWindow(ExwlWindow* window) {
 	DestroyWindow(window->win32.hWnd);
 }
-#endif

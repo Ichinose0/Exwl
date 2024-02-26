@@ -46,4 +46,13 @@ typedef struct t_X11Handle {
 	Window window;
 } X11Handle;
 ExwlWindow* CreateWindowForX11();
+
+void DefaultWindowGeometryForX11(WindowGeometry* geometry);
+
+ex_bool SetWindowSizeForX11(ExwlWindow* window, uint width, uint height);
+ex_bool SetWindowPositionForX11(ExwlWindow* window, uint x, uint y);
+void SetWindowTitleForX11(ExwlWindow* window, char* title);
+void SetWindowVisibleForX11(ExwlWindow* window, ex_bool visible);
+void SetWindowMaximizeForX11(ExwlWindow* window);
+void SetWindowMinimizeForX11(ExwlWindow* window);
 #endif

@@ -22,8 +22,6 @@ set(exwl_SRC
     src/general.c
     src/native.c
     src/window.c
-    src/win32_platform.c
-    src/x11_platform.c
 
     src/include/internal.h
     src/include/platform.h
@@ -32,12 +30,19 @@ set(exwl_SRC
     include/Exwl/native.h
 )
 
+if(WIN32)
+set(exwl_PLATFROM_SRC src/win32_platform.c)
+elseif(UNIX)
+set(exwl_PLATFROM_SRC src/x11_platform.c)
+endif()
+
 project(Exwl VERSION ${exVERSION} DESCRIPTION "Extensible windowing library" LANGUAGES C CXX)
 
-add_library(Exwl${exVERSION} SHARED ${exwl_SRC})
+add_library(Exwl${exVERSION} SHARED ${exwl_SRC} ${exwl_PLATFROM_SRC})
 add_executable(window examples/window.c)
 add_executable(cppsample examples/cppsample.cpp)
 
+if(UNIX)
 find_package(X11 REQUIRED)
 
 # Check if X11 was found
@@ -49,6 +54,7 @@ if (X11_FOUND)
     target_link_libraries(Exwl${exVERSION} ${X11_LIBRARIES})
 else()
     message(FATAL_ERROR "X11 library not found")
+endif()
 endif()
 
 target_link_libraries(window Exwl${exVERSION})
