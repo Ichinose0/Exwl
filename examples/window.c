@@ -3,17 +3,18 @@
 #include <stdlib.h>
 
 int main() {
+
 	WindowGeometry geo;
 	WindowDescriptor descriptor;
 
 	exwlDefaultWindowGeometry(&geo);
 
 	descriptor.geometry = geo;
-	descriptor.style = EXWL_WINDOW_COMPLETE;
+	descriptor.style = EXWL_WS_FRAME|EXWL_WS_CAPTION|EXWL_WS_CLOSABLE;
 	ExwlWindow* window = exwlCreateWindowFromDescriptor(descriptor);
 
 	exwlSetWindowTitle(window, "Exwl Window!");
-	exwlSetWindowVisible(window, EX_TRUE);
+	exwlSetWindowVisible(window, ExTrue);
 
 	WindowGeometry geometry;
 	exwlGetWindowGeometry(window, &geometry);

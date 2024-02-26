@@ -72,9 +72,9 @@ EXWLAPI ExwlWindow* exwlCreateWindow() {
 	return CreateWindowForX11();
 }
 
-EXWLAPI ex_bool exwlSetWindowSize(ExwlWindow* window, unsigned int width, unsigned int height) { return EX_FALSE; }
+EXWLAPI ex_bool exwlSetWindowSize(ExwlWindow* window, unsigned int width, unsigned int height) { return ExFalse; }
 
-EXWLAPI ex_bool exwlSetWindowPosition(ExwlWindow* window, uint x, uint y) { return EX_FALSE; }
+EXWLAPI ex_bool exwlSetWindowPosition(ExwlWindow* window, uint x, uint y) { return ExFalse; }
 
 EXWLAPI void exwlSetWindowTitle(ExwlWindow* window, char* title) { 
 	SetWindowTitleForX11(window,title);
@@ -87,18 +87,18 @@ EXWLAPI void exwlSetWindowMaximize(ExwlWindow* window) { }
 EXWLAPI void exwlSetWindowMinimize(ExwlWindow* window) { }
 EXWLAPI void exwlSetWindowStyle(ExwlWindow* window, unsigned int style) { }
 
-EXWLAPI ex_bool exwlSetForegroundWindow(ExwlWindow* window) { return EX_FALSE; }
+EXWLAPI ex_bool exwlSetForegroundWindow(ExwlWindow* window) { return ExFalse; }
 
-EXWLAPI ex_bool exwlGetWindowGeometry(ExwlWindow* window, WindowGeometry* geometry) { return EX_FALSE; }
+EXWLAPI ex_bool exwlGetWindowGeometry(ExwlWindow* window, WindowGeometry* geometry) { return ExFalse; }
 
-EXWLAPI ex_bool exwlWaitWindowMessage(ExwlWindow* window) { return EX_FALSE; }
+EXWLAPI ex_bool exwlWaitWindowMessage(ExwlWindow* window) { return ExFalse; }
 EXWLAPI void exwlDispatchWindowMessage(ExwlWindow* window) { }
 #else
 EXWLAPI ExwlWindow* exwlCreateWindow() { return NULL; }
 
-EXWLAPI ex_bool exwlSetWindowSize(ExwlWindow* window, unsigned int width, unsigned int height) { return EX_FALSE; }
+EXWLAPI ex_bool exwlSetWindowSize(ExwlWindow* window, unsigned int width, unsigned int height) { return ExFalse; }
 
-EXWLAPI ex_bool exwlSetWindowPosition(ExwlWindow* window, uint x, uint y) { return EX_FALSE; }
+EXWLAPI ex_bool exwlSetWindowPosition(ExwlWindow* window, uint x, uint y) { return ExFalse; }
 
 EXWLAPI void exwlSetWindowTitle(ExwlWindow* window, char* title) { }
 EXWLAPI void exwlSetWindowVisible(ExwlWindow* window, ex_bool visible) { }
@@ -107,11 +107,11 @@ EXWLAPI void exwlSetWindowMaximize(ExwlWindow* window) { }
 EXWLAPI void exwlSetWindowMinimize(ExwlWindow* window) { }
 EXWLAPI void exwlSetWindowStyle(ExwlWindow* window, unsigned int style) { }
 
-EXWLAPI ex_bool exwlSetForegroundWindow(ExwlWindow* window) { return EX_FALSE; }
+EXWLAPI ex_bool exwlSetForegroundWindow(ExwlWindow* window) { return ExFalse; }
 
-EXWLAPI ex_bool exwlGetWindowGeometry(ExwlWindow* window, WindowGeometry* geometry) { return EX_FALSE; }
+EXWLAPI ex_bool exwlGetWindowGeometry(ExwlWindow* window, WindowGeometry* geometry) { return ExFalse; }
 
-EXWLAPI ex_bool exwlWaitWindowMessage(ExwlWindow* window) { return EX_FALSE; }
+EXWLAPI ex_bool exwlWaitWindowMessage(ExwlWindow* window) { return ExFalse; }
 EXWLAPI void exwlDispatchWindowMessage(ExwlWindow* window) { }
 #endif
 

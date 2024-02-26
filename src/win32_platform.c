@@ -12,17 +12,17 @@
 
 DWORD ExtractWindowStyle(unsigned int style) {
 	DWORD s = WS_VISIBLE;
-	if (style & EXWL_WINDOW_FRAME) {
+	if (style & EXWL_WS_FRAME) {
 		s |= WS_BORDER | WS_THICKFRAME;
 	}
-	if (style & EXWL_WINDOW_CAPTION) {
+	if (style & EXWL_WS_CAPTION) {
 		s |= WS_CAPTION;
 	}
-	if (style & EXWL_WINDOW_CLOSABLE)
+	if (style & EXWL_WS_CLOSABLE)
 		s |= WS_SYSMENU;
-	if (style & EXWL_WINDOW_MAXIMIZABLE)
+	if (style & EXWL_WS_MAXIMIZABLE)
 		s |= WS_MAXIMIZEBOX;
-	if (style & EXWL_WINDOW_MINIMIZABLE) {
+	if (style & EXWL_WS_MINIMIZABLE) {
 		s |= WS_MINIMIZEBOX;
 	}
 
@@ -109,7 +109,7 @@ ex_bool GetWindowGeometryForWin32(ExwlWindow* window, WindowGeometry* geometry) 
 	WINDOWINFO info;
 	info.cbSize = sizeof(WINDOWINFO);
 	if (!GetWindowInfo(window->win32.hWnd, &info))
-		return EX_FALSE;
+		return ExFalse;
 
 	// Width
 	geometry->width = info.rcWindow.right - info.rcWindow.left;
@@ -119,14 +119,14 @@ ex_bool GetWindowGeometryForWin32(ExwlWindow* window, WindowGeometry* geometry) 
 	geometry->x = info.rcWindow.left;
 	// Y
 	geometry->y = info.rcWindow.top;
-	return EX_TRUE;
+	return ExTrue;
 }
 
 ex_bool WaitWindowMessageForWin32(ExwlWindow* window) {
 	if (window != NULL)
 		return GetMessage(&(window->win32.msg), NULL, 0, 0);
 	else
-		return EX_FALSE;
+		return ExFalse;
 }
 void DispatchWindowMessageForWin32(ExwlWindow* window) {
 	DispatchMessage(&(window->win32.msg));
