@@ -1,3 +1,10 @@
+/////////////////////////////////////////////////////////////////////////////
+// Name:        src/window.c
+// Purpose:     Implementation of window-related functions to be exposed in the header
+// Author:      Ichinose0
+// Created:     2024-02-17
+/////////////////////////////////////////////////////////////////////////////
+
 #include <Exwl/Exwl.h>
 #include <platform.h>
 #include <stdio.h>
