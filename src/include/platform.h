@@ -30,9 +30,11 @@ void SetWindowMaximizeForWin32(ExwlWindow* window);
 void SetWindowMinimizeForWin32(ExwlWindow* window);
 void SetWindowStyleForWin32(ExwlWindow* window, unsigned int style);
 /// The function names are prefixed with an underscore to prevent duplication with Windows API function names.
-ex_bool _SetForegroundWindowForWin32(ExwlWindow* window);
+ex_bool SetForegroundWindowForWin32(ExwlWindow* window);
 ex_bool GetWindowGeometryForWin32(ExwlWindow* window, WindowGeometry* geometry);
 
+ex_bool WaitEventForWin32(ExwlWindow* window, EventStruct* e);
+ex_bool PeekEventForWin32(ExwlWindow* window, EventStruct* e);
 ex_bool WaitWindowMessageForWin32(ExwlWindow* window);
 void DispatchWindowMessageForWin32(ExwlWindow* window);
 #endif
@@ -55,4 +57,48 @@ void SetWindowTitleForX11(ExwlWindow* window, char* title);
 void SetWindowVisibleForX11(ExwlWindow* window, ex_bool visible);
 void SetWindowMaximizeForX11(ExwlWindow* window);
 void SetWindowMinimizeForX11(ExwlWindow* window);
+
+ex_bool WaitEventForX11(ExwlWindow* window, EventStruct* e);
+ex_bool PeekEventForX11(ExwlWindow* window, EventStruct* e);
+ex_bool WaitWindowMessageForX11(ExwlWindow* window);
+void DispatchWindowMessageForX11(ExwlWindow* window);
+#endif
+
+#ifdef _WIN32
+#define _CreateWindow CreateWindowForWin32
+#define DefaultWindowGeometry DefaultWindowGeometryForWin32
+
+#define SetWindowSize SetWindowSizeForWin32
+#define SetWindowPosition SetWindowPositionForWin32
+#define SetWindowTitle SetWindowTitleForWin32
+#define SetWindowVisible SetWindowVisibleForWin32
+#define SetWindowMaximize SetWindowMaximizeForWin32
+#define SetWindowMinimize SetWindowMinimizeForWin32
+#define SetWindowStyle SetWindowStyleForWin32
+#define SetForegroundWindow SetForegroundWindowForWin32
+#define GetWindowGeometry GetWindowGeometryForWin32
+
+#define WaitEvent WaitEventForWin32
+#define PeekEvent PeekEventForWin32
+#define WaitWindowMessage WaitWindowMessageForWin32
+#define DispatchWindowMessage DispatchWindowMessageForWin32
+
+#elif defined(__linux__)
+#define _CreateWindow CreateWindowForX11()
+#define DefaultWindowGeometry DefaultWindowGeometryForX11()
+
+#define SetWindowSize SetWindowSizeForX11
+#define SetWindowPosition SetWindowPositionForX11
+#define SetWindowTitle SetWindowTitleForX11
+#define SetWindowVisible SetWindowVisibleForX11
+#define SetWindowMaximize SetWindowMaximizeForX11
+#define SetWindowMinimize SetWindowMinimizeForX11
+#define SetWindowStyle SetWindowStyleForX11
+#define SetForegroundWindow SetForegroundWindowForX11
+#define GetWindowGeometry GetWindowGeometryForX11
+
+#define WaitEvent WaitEventForX11
+#define PeekEvent PeekEventForX11
+#define WaitWindowMessage WaitWindowMessageForX11
+#define DispatchWindowMessage DispatchWindowMessageForX11
 #endif

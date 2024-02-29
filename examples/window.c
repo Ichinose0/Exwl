@@ -21,8 +21,15 @@ int main() {
 
 	printf("Width: %d\nHeight: %d\nX: %d\nY: %d", geometry.width,geometry.height,geometry.x,geometry.y);
 
-	while (exwlWaitWindowMessage(window)) {
-		exwlDispatchWindowMessage(window);
+	ex_bool is_running = ExTrue;
+
+	EventStruct e;
+
+	while (is_running) {
+		if (exwlWaitEvent(window, &e))
+			exwlDispatchWindowMessage(window);
+		else
+			is_running = ExFalse;
 	};
 
 	exwlDestroyWindow(window);

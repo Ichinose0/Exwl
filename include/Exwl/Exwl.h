@@ -9,7 +9,9 @@
 
 typedef unsigned char ex_bool;
 typedef unsigned int uint;
+
 typedef uint WindowStyle;
+typedef uint WindowEvent;
 
 typedef struct ExwlWindow ExwlWindow;
 
@@ -55,6 +57,10 @@ typedef struct WindowDescriptor {
 	WindowStyle style;
 } WindowDescriptor;
 
+typedef struct EventStruct {
+	WindowEvent event;
+} EventStruct;
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -73,6 +79,8 @@ extern "C" {
 	EXWLAPI ex_bool exwlSetForegroundWindow(ExwlWindow* window);
 	EXWLAPI ex_bool exwlGetWindowGeometry(ExwlWindow* window, WindowGeometry* geometry);
 	
+	EXWLAPI ex_bool exwlWaitEvent(ExwlWindow* window, EventStruct* e);
+	EXWLAPI ex_bool exwlPeekEvent(ExwlWindow* window, EventStruct* e);
 	EXWLAPI ex_bool exwlWaitWindowMessage(ExwlWindow* window);
 	EXWLAPI void exwlDispatchWindowMessage(ExwlWindow* window);
 	EXWLAPI void exwlDestroyWindow(ExwlWindow* window);

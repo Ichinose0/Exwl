@@ -101,7 +101,7 @@ void SetWindowStyleForWin32(ExwlWindow* window, unsigned int style) {
 	SetWindowPos(window->win32.hWnd, NULL, 0, 0, 0, 0, (SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE | SWP_FRAMECHANGED));
 }
 
-ex_bool _SetForegroundWindowForWin32(ExwlWindow* window) {
+ex_bool SetForegroundWindowForWin32(ExwlWindow* window) {
 	return SetForegroundWindow(window->win32.hWnd);
 }
 
@@ -122,6 +122,20 @@ ex_bool GetWindowGeometryForWin32(ExwlWindow* window, WindowGeometry* geometry) 
 	return ExTrue;
 }
 
+ex_bool WaitEventForWin32(ExwlWindow* window, EventStruct* e) {
+	if (window != NULL) {
+		BOOL result = GetMessage(&(window->win32.msg), NULL, 0, 0);
+		return result;
+	}
+	else
+		return ExFalse;
+}
+ex_bool PeekEventForWin32(ExwlWindow* window, EventStruct* e) {
+	if (window != NULL)
+		return PeekMessage(&window->win32.msg, NULL, 0, 0, PM_NOREMOVE);
+	else
+		return ExFalse;
+}
 ex_bool WaitWindowMessageForWin32(ExwlWindow* window) {
 	if (window != NULL)
 		return GetMessage(&(window->win32.msg), NULL, 0, 0);
