@@ -6,6 +6,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include <Exwl/Exwl.h>
+#include <internal.h>
 #include <platform.h>
 #include <stdio.h>
 #include <assert.h>
@@ -87,4 +88,12 @@ EXWLAPI void exwlDestroyWindow(ExwlWindow* window) {
 	assert(window != NULL);
 	_exwlDestroyWindow(window);
 	free(window);
+}
+
+
+EXWLAPI void exwlRedrawRequestedFunc(ExwlWindow* window, void(*pfunc)()) {
+	window->functions.pRedrawRequested = pfunc;
+}
+EXWLAPI void exwlClosedFunc(ExwlWindow* window, void(*pfunc)()) {
+	window->functions.pClosed = pfunc;
 }

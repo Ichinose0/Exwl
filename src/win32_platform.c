@@ -30,9 +30,27 @@ DWORD ExtractWindowStyle(unsigned int style) {
 }
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
-	if (msg == WM_DESTROY) {
-		PostQuitMessage(0);
+	switch (msg) {
+	case WM_PAINT:
+	{
+		LONG_PTR p = GetWindowLongPtr(hwnd, GWLP_USERDATA);
+		if (p != NULL) {
+			WindowFunc* functions = (WindowFunc*)p;
+			functions->pRedrawRequested();
+		}
+		break;
 	}
+	case WM_DESTROY:
+	{
+		LONG_PTR p = GetWindowLongPtr(hwnd, GWLP_USERDATA);
+		if (p != NULL) {
+			WindowFunc* functions = (WindowFunc*)p;
+			functions->pClosed();
+		}
+		PostQuitMessage(0);
+		break;
+	}
+	};
 	return DefWindowProc(hwnd, msg, wp, lp);
 }
 
@@ -55,7 +73,7 @@ ExwlWindow* CreateWindowForWin32() {
 	if (!RegisterClass(&winc)) return NULL;
 
 	HWND hWnd = CreateWindow(TEXT("DEF"), TEXT("Hello, world"), WS_OVERLAPPEDWINDOW, 0, 0, 800, 600, NULL, NULL, hInstance, NULL);
-
+	SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR)&window->functions);
 	window->win32.hInstance = hInstance;
 	window->win32.hWnd = hWnd;
 	return window;

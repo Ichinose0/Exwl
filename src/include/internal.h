@@ -9,7 +9,14 @@
 
 #include "platform.h"
 
+typedef struct WindowFunc {
+	void (*pRedrawRequested)();
+	void (*pClosed)();
+} WindowFunc;
+
 struct ExwlWindow {
+	WindowFunc functions;
+
 #ifdef EXWL_PLATFORM_WIN32
 	Win32Handle win32;
 #elif __linux__

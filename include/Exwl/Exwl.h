@@ -79,6 +79,9 @@ extern "C" {
 	EXWLAPI ex_bool exwlSetForegroundWindow(ExwlWindow* window);
 	EXWLAPI ex_bool exwlGetWindowGeometry(ExwlWindow* window, WindowGeometry* geometry);
 	
+	EXWLAPI void exwlRedrawRequestedFunc(ExwlWindow* window, void(*pfunc)());
+	EXWLAPI void exwlClosedFunc(ExwlWindow* window, void(*pfunc)());
+
 	EXWLAPI ex_bool exwlWaitEvent(ExwlWindow* window, EventStruct* e);
 	EXWLAPI ex_bool exwlPeekEvent(ExwlWindow* window, EventStruct* e);
 	EXWLAPI ex_bool exwlWaitWindowMessage(ExwlWindow* window);

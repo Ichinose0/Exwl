@@ -2,6 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void redraw() {
+	printf("Redraw");
+}
+
 int main() {
 
 	WindowGeometry geo;
@@ -15,6 +19,8 @@ int main() {
 
 	exwlSetWindowTitle(window, "Exwl Window!");
 	exwlSetWindowVisible(window, ExTrue);
+
+	exwlRedrawRequestedFunc(window, redraw);
 
 	WindowGeometry geometry;
 	exwlGetWindowGeometry(window, &geometry);
