@@ -31,12 +31,43 @@ DWORD ExtractWindowStyle(unsigned int style) {
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
 	switch (msg) {
+	case WM_CREATE:
+	{
+		LONG_PTR p = GetWindowLongPtr(hwnd, GWLP_USERDATA);
+		if (p != NULL) {
+			WindowFunc* functions = (WindowFunc*)p;
+			if (functions->pCreated != NULL)
+				functions->pCreated();
+		}
+		break;
+	}
+	case WM_MOVE:
+	{
+		LONG_PTR p = GetWindowLongPtr(hwnd, GWLP_USERDATA);
+		if (p != NULL) {
+			WindowFunc* functions = (WindowFunc*)p;
+			if (functions->pMoved != NULL)
+				functions->pMoved((uint)LOWORD(lp), (uint)HIWORD(lp));
+		}
+		break;
+	}
+	case WM_SIZE:
+	{
+		LONG_PTR p = GetWindowLongPtr(hwnd, GWLP_USERDATA);
+		if (p != NULL) {
+			WindowFunc* functions = (WindowFunc*)p;
+			if (functions->pResized != NULL)
+				functions->pResized((uint)LOWORD(lp), (uint)HIWORD(lp));
+		}
+		break;
+	}
 	case WM_PAINT:
 	{
 		LONG_PTR p = GetWindowLongPtr(hwnd, GWLP_USERDATA);
 		if (p != NULL) {
 			WindowFunc* functions = (WindowFunc*)p;
-			functions->pRedrawRequested();
+			if (functions->pRedrawRequested != NULL)
+				functions->pRedrawRequested();
 		}
 		break;
 	}
@@ -45,7 +76,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
 		LONG_PTR p = GetWindowLongPtr(hwnd, GWLP_USERDATA);
 		if (p != NULL) {
 			WindowFunc* functions = (WindowFunc*)p;
-			functions->pClosed();
+			if (functions->pClosed != NULL)
+				functions->pClosed();
 		}
 		PostQuitMessage(0);
 		break;
@@ -76,6 +108,7 @@ ExwlWindow* CreateWindowForWin32() {
 	SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR)&window->functions);
 	window->win32.hInstance = hInstance;
 	window->win32.hWnd = hWnd;
+
 	return window;
 }
 

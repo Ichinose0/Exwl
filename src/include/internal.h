@@ -10,6 +10,9 @@
 #include "platform.h"
 
 typedef struct WindowFunc {
+	void (*pCreated)();
+	void (*pMoved)(uint x,uint y);
+	void (*pResized)(uint width, uint height);
 	void (*pRedrawRequested)();
 	void (*pClosed)();
 } WindowFunc;

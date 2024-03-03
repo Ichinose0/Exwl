@@ -14,7 +14,11 @@
 #include <stddef.h>
 
 EXWLAPI ExwlWindow* exwlCreateWindow() {
-	return _CreateWindow();
+	ExwlWindow* window = _CreateWindow();
+	window->functions.pCreated = NULL;
+	window->functions.pMoved = NULL;
+	window->functions.pRedrawRequested = NULL;
+	window->functions.pClosed = NULL;
 }
 
 EXWLAPI ExwlWindow* exwlCreateWindowFromDescriptor(WindowDescriptor descriptor) {
@@ -90,9 +94,17 @@ EXWLAPI void exwlDestroyWindow(ExwlWindow* window) {
 	free(window);
 }
 
-
+EXWLAPI void exwlCreatedFunc(ExwlWindow* window, void(*pfunc)()) {
+	window->functions.pCreated = pfunc;
+}
 EXWLAPI void exwlRedrawRequestedFunc(ExwlWindow* window, void(*pfunc)()) {
 	window->functions.pRedrawRequested = pfunc;
+}
+EXWLAPI void exwlMovedFunc(ExwlWindow* window, void(*pfunc)()) {
+	window->functions.pMoved = pfunc;
+}
+EXWLAPI void exwlResizedFunc(ExwlWindow* window, void(*pfunc)()) {
+	window->functions.pResized = pfunc;
 }
 EXWLAPI void exwlClosedFunc(ExwlWindow* window, void(*pfunc)()) {
 	window->functions.pClosed = pfunc;

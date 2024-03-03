@@ -30,7 +30,7 @@ typedef struct ExwlWindow ExwlWindow;
 
 #define EXWL_WR_CREATED 0
 #define EXWL_WR_REDRAW 12
-#define EXWL_WR_MOVE 13
+#define EXWL_WR_MOVED 13
 #define EXWL_WR_RESIZED 14
 #define EXWL_WR_CLOSED 30
 #define EXWL_WR_DESTROY 31
@@ -79,7 +79,10 @@ extern "C" {
 	EXWLAPI ex_bool exwlSetForegroundWindow(ExwlWindow* window);
 	EXWLAPI ex_bool exwlGetWindowGeometry(ExwlWindow* window, WindowGeometry* geometry);
 	
+	EXWLAPI void exwlCreatedFunc(ExwlWindow* window, void(*pfunc)());
 	EXWLAPI void exwlRedrawRequestedFunc(ExwlWindow* window, void(*pfunc)());
+	EXWLAPI void exwlMovedFunc(ExwlWindow* window, void(*pfunc)());
+	EXWLAPI void exwlResizedFunc(ExwlWindow* window, void(*pfunc)());
 	EXWLAPI void exwlClosedFunc(ExwlWindow* window, void(*pfunc)());
 
 	EXWLAPI ex_bool exwlWaitEvent(ExwlWindow* window, EventStruct* e);
