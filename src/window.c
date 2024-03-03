@@ -73,11 +73,11 @@ EXWLAPI ex_bool exwlGetWindowGeometry(ExwlWindow* window, WindowGeometry* geomet
 	return GetWindowGeometry(window, geometry);
 }
 
-EXWLAPI ex_bool exwlWaitEvent(ExwlWindow* window, EventStruct* e) {
-	WaitEventForWin32(window, e);
+EXWLAPI ex_bool exwlWaitEvent(ExwlWindow* window) {
+	WaitEventForWin32(window);
 }
-EXWLAPI ex_bool exwlPeekEvent(ExwlWindow* window, EventStruct* e) {
-	PeekEventForWin32(window, e);
+EXWLAPI ex_bool exwlPeekEvent(ExwlWindow* window) {
+	PeekEventForWin32(window);
 }
 EXWLAPI ex_bool exwlWaitWindowMessage(ExwlWindow* window) {
 	assert(window != NULL);
@@ -100,10 +100,10 @@ EXWLAPI void exwlCreatedFunc(ExwlWindow* window, void(*pfunc)()) {
 EXWLAPI void exwlRedrawRequestedFunc(ExwlWindow* window, void(*pfunc)()) {
 	window->functions.pRedrawRequested = pfunc;
 }
-EXWLAPI void exwlMovedFunc(ExwlWindow* window, void(*pfunc)()) {
+EXWLAPI void exwlMovedFunc(ExwlWindow* window, void(*pfunc)(uint x,uint y)) {
 	window->functions.pMoved = pfunc;
 }
-EXWLAPI void exwlResizedFunc(ExwlWindow* window, void(*pfunc)()) {
+EXWLAPI void exwlResizedFunc(ExwlWindow* window, void(*pfunc)(uint width,uint height)) {
 	window->functions.pResized = pfunc;
 }
 EXWLAPI void exwlClosedFunc(ExwlWindow* window, void(*pfunc)()) {

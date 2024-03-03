@@ -29,10 +29,8 @@ int main() {
 
 	ex_bool is_running = ExTrue;
 
-	EventStruct e;
-
 	while (is_running) {
-		if (exwlWaitEvent(window, &e))
+		if (exwlWaitEvent(window))
 			exwlDispatchWindowMessage(window);
 		else
 			is_running = ExFalse;

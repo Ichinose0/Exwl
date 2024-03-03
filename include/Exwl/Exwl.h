@@ -57,10 +57,6 @@ typedef struct WindowDescriptor {
 	WindowStyle style;
 } WindowDescriptor;
 
-typedef struct EventStruct {
-	WindowEvent event;
-} EventStruct;
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -85,8 +81,8 @@ extern "C" {
 	EXWLAPI void exwlResizedFunc(ExwlWindow* window, void(*pfunc)());
 	EXWLAPI void exwlClosedFunc(ExwlWindow* window, void(*pfunc)());
 
-	EXWLAPI ex_bool exwlWaitEvent(ExwlWindow* window, EventStruct* e);
-	EXWLAPI ex_bool exwlPeekEvent(ExwlWindow* window, EventStruct* e);
+	EXWLAPI ex_bool exwlWaitEvent(ExwlWindow* window);
+	EXWLAPI ex_bool exwlPeekEvent(ExwlWindow* window);
 	EXWLAPI ex_bool exwlWaitWindowMessage(ExwlWindow* window);
 	EXWLAPI void exwlDispatchWindowMessage(ExwlWindow* window);
 	EXWLAPI void exwlDestroyWindow(ExwlWindow* window);

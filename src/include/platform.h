@@ -33,8 +33,8 @@ void SetWindowStyleForWin32(ExwlWindow* window, unsigned int style);
 ex_bool SetForegroundWindowForWin32(ExwlWindow* window);
 ex_bool GetWindowGeometryForWin32(ExwlWindow* window, WindowGeometry* geometry);
 
-ex_bool WaitEventForWin32(ExwlWindow* window, EventStruct* e);
-ex_bool PeekEventForWin32(ExwlWindow* window, EventStruct* e);
+ex_bool WaitEventForWin32(ExwlWindow* window);
+ex_bool PeekEventForWin32(ExwlWindow* window);
 ex_bool WaitWindowMessageForWin32(ExwlWindow* window);
 void DispatchWindowMessageForWin32(ExwlWindow* window);
 #endif

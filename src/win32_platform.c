@@ -173,7 +173,7 @@ ex_bool GetWindowGeometryForWin32(ExwlWindow* window, WindowGeometry* geometry) 
 	return ExTrue;
 }
 
-ex_bool WaitEventForWin32(ExwlWindow* window, EventStruct* e) {
+ex_bool WaitEventForWin32(ExwlWindow* window) {
 	if (window != NULL) {
 		BOOL result = GetMessage(&(window->win32.msg), NULL, 0, 0);
 		return result;
@@ -181,7 +181,7 @@ ex_bool WaitEventForWin32(ExwlWindow* window, EventStruct* e) {
 	else
 		return ExFalse;
 }
-ex_bool PeekEventForWin32(ExwlWindow* window, EventStruct* e) {
+ex_bool PeekEventForWin32(ExwlWindow* window) {
 	if (window != NULL)
 		return PeekMessage(&window->win32.msg, NULL, 0, 0, PM_NOREMOVE);
 	else
