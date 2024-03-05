@@ -77,13 +77,12 @@ extern "C" {
 	
 	EXWLAPI void exwlCreatedFunc(ExwlWindow* window, void(*pfunc)());
 	EXWLAPI void exwlRedrawRequestedFunc(ExwlWindow* window, void(*pfunc)());
-	EXWLAPI void exwlMovedFunc(ExwlWindow* window, void(*pfunc)());
-	EXWLAPI void exwlResizedFunc(ExwlWindow* window, void(*pfunc)());
+	EXWLAPI void exwlMovedFunc(ExwlWindow* window, void(*pfunc)(uint x,uint y));
+	EXWLAPI void exwlResizedFunc(ExwlWindow* window, void(*pfunc)(uint width,uint height));
 	EXWLAPI void exwlClosedFunc(ExwlWindow* window, void(*pfunc)());
 
 	EXWLAPI ex_bool exwlWaitEvent(ExwlWindow* window);
 	EXWLAPI ex_bool exwlPeekEvent(ExwlWindow* window);
-	EXWLAPI ex_bool exwlWaitWindowMessage(ExwlWindow* window);
 	EXWLAPI void exwlDispatchWindowMessage(ExwlWindow* window);
 	EXWLAPI void exwlDestroyWindow(ExwlWindow* window);
 #ifdef __cplusplus
@@ -130,8 +129,30 @@ public:
 	bool getWindowGeometry(WindowGeometry* geometry) {
 		return exwlGetWindowGeometry(this->window, geometry);
 	}
-	bool waitWindowMessage() {
-		return exwlWaitWindowMessage(this->window);
+
+	// Callbacks
+	void setCreatedFunc(void(*pfunc)()) {
+		exwlCreatedFunc(this->window,pfunc);
+	}
+	void setRedrawRequestedFunc(void(*pfunc)()) {
+		exwlRedrawRequestedFunc(this->window,pfunc);
+	}
+	void setMovedFunc(void(*pfunc)(uint x,uint y)) {
+		exwlMovedFunc(this->window,pfunc);
+	}
+	void setResizedFunc(void(*pfunc)(uint width,uint height)) {
+		exwlResizedFunc(this->window,pfunc);
+	}
+	void setClosedFunc(void(*pfunc)()) {
+		exwlClosedFunc(this->window,pfunc);
+	}
+
+	// Event handling
+	bool waitEvent() {
+		return exwlWaitEvent(this->window);
+	}
+	bool peekEvent() {
+		return exwlPeekEvent(this->window);
 	}
 
 	void dispatchWindowMessage() {
