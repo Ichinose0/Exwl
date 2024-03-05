@@ -27,7 +27,6 @@ set(exwl_SRC
     src/include/platform.h
 
     include/Exwl/Exwl.h
-    include/Exwl/native.h
 )
 
 if(WIN32)

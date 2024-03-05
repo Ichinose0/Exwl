@@ -85,6 +85,10 @@ extern "C" {
 	EXWLAPI ex_bool exwlPeekEvent(ExwlWindow* window);
 	EXWLAPI void exwlDispatchWindowMessage(ExwlWindow* window);
 	EXWLAPI void exwlDestroyWindow(ExwlWindow* window);
+
+
+	EXWLAPI void* exwlGetHwndOfWindow(ExwlWindow* window);
+	EXWLAPI void* exwlGetInstanceOfWindow(ExwlWindow* window);
 #ifdef __cplusplus
 }
 #endif
@@ -157,6 +161,14 @@ public:
 
 	void dispatchWindowMessage() {
 		exwlDispatchWindowMessage(this->window);
+	}
+
+	void* getHwnd() {
+		return exwlGetHwndOfWindow(this->window);
+	}
+
+	void* getHinstance() {
+		return exwlGetInstanceOfWindow(this->window);
 	}
 
 
