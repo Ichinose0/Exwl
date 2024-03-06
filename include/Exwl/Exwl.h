@@ -86,7 +86,6 @@ extern "C" {
 	EXWLAPI void exwlDispatchWindowMessage(ExwlWindow* window);
 	EXWLAPI void exwlDestroyWindow(ExwlWindow* window);
 
-
 	EXWLAPI void* exwlGetHwndOfWindow(ExwlWindow* window);
 	EXWLAPI void* exwlGetInstanceOfWindow(ExwlWindow* window);
 #ifdef __cplusplus

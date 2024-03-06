@@ -67,6 +67,11 @@ void SetWindowMinimizeForX11(ExwlWindow* window) {
 
 }
 
+ex_bool WaitEventForX11(ExwlWindow* window);
+ex_bool PeekEventForX11(ExwlWindow* window);
+ex_bool WaitWindowMessageForX11(ExwlWindow* window);
+void DispatchWindowMessageForX11(ExwlWindow* window);
+
 void _exwlDestroyWindow(ExwlWindow* window) {
     XDestroyWindow(window->x11.display, window->x11.window);
 	XCloseDisplay(window->x11.display);

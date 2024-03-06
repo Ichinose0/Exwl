@@ -79,10 +79,6 @@ EXWLAPI ex_bool exwlWaitEvent(ExwlWindow* window) {
 EXWLAPI ex_bool exwlPeekEvent(ExwlWindow* window) {
 	PeekEventForWin32(window);
 }
-EXWLAPI ex_bool exwlWaitWindowMessage(ExwlWindow* window) {
-	assert(window != NULL);
-	return WaitWindowMessage(window);
-}
 EXWLAPI void exwlDispatchWindowMessage(ExwlWindow* window) {
 	assert(window != NULL);
 	DispatchWindowMessage(window);

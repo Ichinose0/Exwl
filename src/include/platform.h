@@ -29,13 +29,11 @@ void SetWindowVisibleForWin32(ExwlWindow* window, ex_bool visible);
 void SetWindowMaximizeForWin32(ExwlWindow* window);
 void SetWindowMinimizeForWin32(ExwlWindow* window);
 void SetWindowStyleForWin32(ExwlWindow* window, unsigned int style);
-/// The function names are prefixed with an underscore to prevent duplication with Windows API function names.
 ex_bool SetForegroundWindowForWin32(ExwlWindow* window);
 ex_bool GetWindowGeometryForWin32(ExwlWindow* window, WindowGeometry* geometry);
 
 ex_bool WaitEventForWin32(ExwlWindow* window);
 ex_bool PeekEventForWin32(ExwlWindow* window);
-ex_bool WaitWindowMessageForWin32(ExwlWindow* window);
 void DispatchWindowMessageForWin32(ExwlWindow* window);
 #endif
 
@@ -58,9 +56,8 @@ void SetWindowVisibleForX11(ExwlWindow* window, ex_bool visible);
 void SetWindowMaximizeForX11(ExwlWindow* window);
 void SetWindowMinimizeForX11(ExwlWindow* window);
 
-ex_bool WaitEventForX11(ExwlWindow* window, EventStruct* e);
-ex_bool PeekEventForX11(ExwlWindow* window, EventStruct* e);
-ex_bool WaitWindowMessageForX11(ExwlWindow* window);
+ex_bool WaitEventForX11(ExwlWindow* window);
+ex_bool PeekEventForX11(ExwlWindow* window);
 void DispatchWindowMessageForX11(ExwlWindow* window);
 #endif
 
@@ -80,7 +77,6 @@ void DispatchWindowMessageForX11(ExwlWindow* window);
 
 #define WaitEvent WaitEventForWin32
 #define PeekEvent PeekEventForWin32
-#define WaitWindowMessage WaitWindowMessageForWin32
 #define DispatchWindowMessage DispatchWindowMessageForWin32
 
 #elif defined(__linux__)
@@ -99,6 +95,5 @@ void DispatchWindowMessageForX11(ExwlWindow* window);
 
 #define WaitEvent WaitEventForX11
 #define PeekEvent PeekEventForX11
-#define WaitWindowMessage WaitWindowMessageForX11
 #define DispatchWindowMessage DispatchWindowMessageForX11
 #endif

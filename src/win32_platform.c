@@ -187,12 +187,6 @@ ex_bool PeekEventForWin32(ExwlWindow* window) {
 	else
 		return ExFalse;
 }
-ex_bool WaitWindowMessageForWin32(ExwlWindow* window) {
-	if (window != NULL)
-		return GetMessage(&(window->win32.msg), NULL, 0, 0);
-	else
-		return ExFalse;
-}
 void DispatchWindowMessageForWin32(ExwlWindow* window) {
 	DispatchMessage(&(window->win32.msg));
 }
