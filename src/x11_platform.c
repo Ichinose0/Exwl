@@ -30,11 +30,11 @@ ExwlWindow* CreateWindowForX11() {
         return NULL;
     }
 
-    window->x11.atoms = RegisterAtoms(window);
-
     int screen_num = DefaultScreen(window->x11.display);
     window->x11.window = XCreateSimpleWindow(window->x11.display, RootWindow(window->x11.display, screen_num), 100, 100, 400, 300, 1,
                                  BlackPixel(window->x11.display, screen_num), WhitePixel(window->x11.display, screen_num));
+
+    window->x11.atoms = RegisterAtoms(window);
 
 	return window;
 }
@@ -64,9 +64,19 @@ void SetWindowMaximizeForX11(ExwlWindow* window) {
 void SetWindowMinimizeForX11(ExwlWindow* window) {
 
 }
+void SetWindowStyleForX11(ExwlWindow* window, WindowStyle style) {
+
+}
+ex_bool SetForegroundWindowForX11(ExwlWindow* window) {
+
+}
+
+ex_bool GetWindowGeometryForX11(ExwlWindow* window, WindowGeometry* geometry) {
+    return ExFalse;
+}
 
 ex_bool WaitEventForX11(ExwlWindow* window) {
-    XNextEvent(window->x11.display, &event);
+    XNextEvent(window->x11.display, &window->x11.event);
     return ExTrue;
 }
 ex_bool PeekEventForX11(ExwlWindow* window) {
@@ -74,7 +84,7 @@ ex_bool PeekEventForX11(ExwlWindow* window) {
 }
 void DispatchWindowMessageForX11(ExwlWindow* window) {
     if (window->x11.event.type == ClientMessage && window->x11.event.xclient.data.l[0] == window->x11.atoms.wmDeleteMessage)
-        window.functions.pClosed();
+        window->functions.pClosed();
 }
 
 void _exwlDestroyWindow(ExwlWindow* window) {

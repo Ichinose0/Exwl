@@ -28,7 +28,7 @@ void SetWindowTitleForWin32(ExwlWindow* window, char* title);
 void SetWindowVisibleForWin32(ExwlWindow* window, ex_bool visible);
 void SetWindowMaximizeForWin32(ExwlWindow* window);
 void SetWindowMinimizeForWin32(ExwlWindow* window);
-void SetWindowStyleForWin32(ExwlWindow* window, unsigned int style);
+void SetWindowStyleForWin32(ExwlWindow* window, WindowStyle style);
 ex_bool SetForegroundWindowForWin32(ExwlWindow* window);
 ex_bool GetWindowGeometryForWin32(ExwlWindow* window, WindowGeometry* geometry);
 
@@ -49,6 +49,7 @@ typedef struct t_X11Handle {
 	Display* display;
 	Window window;
 	XEvent event;
+	XAtoms atoms;
 } X11Handle;
 
 ExwlWindow* CreateWindowForX11();
@@ -61,6 +62,9 @@ void SetWindowTitleForX11(ExwlWindow* window, char* title);
 void SetWindowVisibleForX11(ExwlWindow* window, ex_bool visible);
 void SetWindowMaximizeForX11(ExwlWindow* window);
 void SetWindowMinimizeForX11(ExwlWindow* window);
+void SetWindowStyleForX11(ExwlWindow* window, WindowStyle style);
+ex_bool SetForegroundWindowForX11(ExwlWindow* window);
+ex_bool GetWindowGeometryForX11(ExwlWindow* window, WindowGeometry* geometry);
 
 ex_bool WaitEventForX11(ExwlWindow* window);
 ex_bool PeekEventForX11(ExwlWindow* window);
@@ -86,8 +90,8 @@ void DispatchWindowMessageForX11(ExwlWindow* window);
 #define DispatchWindowMessage DispatchWindowMessageForWin32
 
 #elif defined(__linux__)
-#define _CreateWindow CreateWindowForX11()
-#define DefaultWindowGeometry DefaultWindowGeometryForX11()
+#define _CreateWindow CreateWindowForX11
+#define DefaultWindowGeometry DefaultWindowGeometryForX11
 
 #define SetWindowSize SetWindowSizeForX11
 #define SetWindowPosition SetWindowPositionForX11

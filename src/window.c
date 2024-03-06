@@ -17,6 +17,7 @@ EXWLAPI ExwlWindow* exwlCreateWindow() {
 	ExwlWindow* window = _CreateWindow();
 	window->functions.pCreated = NULL;
 	window->functions.pMoved = NULL;
+	window->functions.pResized = NULL;
 	window->functions.pRedrawRequested = NULL;
 	window->functions.pClosed = NULL;
 }
@@ -74,10 +75,10 @@ EXWLAPI ex_bool exwlGetWindowGeometry(ExwlWindow* window, WindowGeometry* geomet
 }
 
 EXWLAPI ex_bool exwlWaitEvent(ExwlWindow* window) {
-	WaitEventForWin32(window);
+	WaitEvent(window);
 }
 EXWLAPI ex_bool exwlPeekEvent(ExwlWindow* window) {
-	PeekEventForWin32(window);
+	PeekEvent(window);
 }
 EXWLAPI void exwlDispatchWindowMessage(ExwlWindow* window) {
 	assert(window != NULL);
