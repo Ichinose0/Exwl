@@ -13,6 +13,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+XAtoms RegisterAtoms(ExwlWindow* window) {
+    XAtoms atoms;
+    atoms.wmDeleteMessage = XInternAtom(window->x11.display, "WM_DELETE_WINDOW", False);
+	XSetWMProtocols(window->x11.display, window->x11.window, &atoms.wmDeleteMessage, 1);
+    return atoms;
+}
+
 ExwlWindow* CreateWindowForX11() {
 	ExwlWindow* window = malloc(sizeof(ExwlWindow));
 	XEvent event;
@@ -23,21 +30,12 @@ ExwlWindow* CreateWindowForX11() {
         return NULL;
     }
 
+    window->x11.atoms = RegisterAtoms(window);
+
     int screen_num = DefaultScreen(window->x11.display);
     window->x11.window = XCreateSimpleWindow(window->x11.display, RootWindow(window->x11.display, screen_num), 100, 100, 400, 300, 1,
                                  BlackPixel(window->x11.display, screen_num), WhitePixel(window->x11.display, screen_num));
 
-	Atom wmDeleteMessage = XInternAtom(window->x11.display, "WM_DELETE_WINDOW", False);
-	XSetWMProtocols(window->x11.display, window->x11.window, &wmDeleteMessage, 1);
-
-    XMapWindow(window->x11.display, window->x11.window);
-
-    while (1) {
-        XNextEvent(window->x11.display, &event);
-        if (event.type == ClientMessage && event.xclient.data.l[0] == wmDeleteMessage)
-            break;
-    }
-    
 	return window;
 }
 
@@ -67,10 +65,17 @@ void SetWindowMinimizeForX11(ExwlWindow* window) {
 
 }
 
-ex_bool WaitEventForX11(ExwlWindow* window);
-ex_bool PeekEventForX11(ExwlWindow* window);
-ex_bool WaitWindowMessageForX11(ExwlWindow* window);
-void DispatchWindowMessageForX11(ExwlWindow* window);
+ex_bool WaitEventForX11(ExwlWindow* window) {
+    XNextEvent(window->x11.display, &event);
+    return ExTrue;
+}
+ex_bool PeekEventForX11(ExwlWindow* window) {
+    return WaitEventForX11(window);
+}
+void DispatchWindowMessageForX11(ExwlWindow* window) {
+    if (window->x11.event.type == ClientMessage && window->x11.event.xclient.data.l[0] == window->x11.atoms.wmDeleteMessage)
+        window.functions.pClosed();
+}
 
 void _exwlDestroyWindow(ExwlWindow* window) {
     XDestroyWindow(window->x11.display, window->x11.window);

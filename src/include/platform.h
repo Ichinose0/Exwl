@@ -41,10 +41,16 @@ void DispatchWindowMessageForWin32(ExwlWindow* window);
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 
+typedef struct t_XAtoms {
+	Atom wmDeleteMessage;
+} XAtoms;
+
 typedef struct t_X11Handle {
 	Display* display;
 	Window window;
+	XEvent event;
 } X11Handle;
+
 ExwlWindow* CreateWindowForX11();
 
 void DefaultWindowGeometryForX11(WindowGeometry* geometry);
