@@ -6,7 +6,6 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include <Exwl/Exwl.h>
-#include <Exwl/native.h>
 #include "internal.h"
 #include <assert.h>
 #include <stddef.h>
