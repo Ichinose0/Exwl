@@ -1,6 +1,7 @@
 <h1 align="center">Exwl</h1>
 <div align="center">
   <img alt="GitHub License" src="https://img.shields.io/github/license/Ichinose0/Exwl">
+  <img alt="CMake on multiple platforms" src="https://github.com/Ichinose0/Exwl/actions/workflows/cmake-multi-platform.yml/badge.svg">
 </div>
 Exwl is a cross-platform window generation and management library that is easy to extend.
 
@@ -10,26 +11,19 @@ Exwl is a cross-platform window generation and management library that is easy t
 #include <Exwl/Exwl.h>
 #include <stdio.h>
 
+void closed() {
+	printf("Window is closed¥n");
+	fflush(stdout);
+}
+
 int main() {
+	ExwlWindow* window = exwlCreateWindow();
 
-	WindowGeometry geo;
-	WindowDescriptor descriptor;
-
-	exwlDefaultWindowGeometry(&geo);
-
-	descriptor.geometry = geo;
-	descriptor.style = EXWL_WS_FRAME|EXWL_WS_CAPTION|EXWL_WS_CLOSABLE;
-	ExwlWindow* window = exwlCreateWindowFromDescriptor(descriptor);
-
-	exwlSetWindowTitle(window, "Exwl Window!");
+	exwlSetWindowTitle(window, "A fantastic window");
 	exwlSetWindowVisible(window, ExTrue);
 
-	exwlRedrawRequestedFunc(window, redraw);
-
-	WindowGeometry geometry;
-	exwlGetWindowGeometry(window, &geometry);
-
-	printf("Width: %d\nHeight: %d\nX: %d\nY: %d", geometry.width,geometry.height,geometry.x,geometry.y);
+	// Specify the callback function when the window is closed
+	exwlClosedFunc(window, closed);
 
 	ex_bool is_running = ExTrue;
 
@@ -46,12 +40,28 @@ int main() {
 ## C++
 ```cpp
 #include <Exwl/Exwl.h>
+#include <iostream>
+
+using namespace std;
+
+void closed() {
+	cout << "Window is closed" << endl;
+}
 
 int main() {
-	Window window("My Window");
+	Window window("A fantastic window");
 	window.setVisible(true);
-	while (window.waitWindowMessage()) {
-		window.dispatchWindowMessage();
+
+	// Specify the callback function when the window is closed
+	window.setClosedFunc(closed);
+
+	bool is_running = true;
+
+	while (is_running) {
+		if (window.waitEvent())
+			window.dispatchWindowMessage();
+		else
+			is_running = false;
 	};
 }
 ```
