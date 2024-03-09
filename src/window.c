@@ -20,6 +20,8 @@ EXWLAPI ExwlWindow* exwlCreateWindow() {
 	window->functions.pResized = NULL;
 	window->functions.pRedrawRequested = NULL;
 	window->functions.pClosed = NULL;
+
+	return window;
 }
 
 EXWLAPI ExwlWindow* exwlCreateWindowFromDescriptor(WindowDescriptor descriptor) {
@@ -75,10 +77,10 @@ EXWLAPI ex_bool exwlGetWindowGeometry(ExwlWindow* window, WindowGeometry* geomet
 }
 
 EXWLAPI ex_bool exwlWaitEvent(ExwlWindow* window) {
-	WaitEvent(window);
+	return WaitEvent(window);
 }
 EXWLAPI ex_bool exwlPeekEvent(ExwlWindow* window) {
-	PeekEvent(window);
+	return PeekEvent(window);
 }
 EXWLAPI void exwlDispatchWindowMessage(ExwlWindow* window) {
 	assert(window != NULL);
@@ -106,3 +108,9 @@ EXWLAPI void exwlResizedFunc(ExwlWindow* window, void(*pfunc)(uint width,uint he
 EXWLAPI void exwlClosedFunc(ExwlWindow* window, void(*pfunc)()) {
 	window->functions.pClosed = pfunc;
 }
+
+#ifdef __cplusplus
+void defaultWindowGeometry(WindowGeometry* geometry) {
+	exwlDefaultWindowGeometry(geometry);
+}
+#endif

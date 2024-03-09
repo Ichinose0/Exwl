@@ -95,84 +95,87 @@ extern "C" {
 // Interface for C++
 
 #ifdef __cplusplus
-class Window {
-private:
-	ExwlWindow* window;
-public:
-	Window() {
-		auto w = exwlCreateWindow();
-		window = w;
-	}
-	Window(char* title) {
-		auto w = exwlCreateWindow();
-		exwlSetWindowTitle(w, title);
-		window = w;
-	}
-	bool setForeground() {
-		return exwlSetForegroundWindow(window);
-	}
-	void setMaximize() {
-		exwlSetWindowMaximize(this->window);
-	}
-	void setMinimize() {
-		exwlSetWindowMinimize(this->window);
-	}
-	void setVisible(bool visible) {
-		exwlSetWindowVisible(this->window, visible);
-	}
-	void setSize(unsigned int width, unsigned int height) {
-		exwlSetWindowSize(this->window, width, height);
-	}
-	void setStyle(unsigned int style) {
-		exwlSetWindowStyle(this->window, style);
-	}
-	void setTitle(char* title) {
-		exwlSetWindowTitle(this->window,title);
-	}
-	bool getWindowGeometry(WindowGeometry* geometry) {
-		return exwlGetWindowGeometry(this->window, geometry);
-	}
+namespace Exwl {
+	void defaultWindowGeometry(WindowGeometry* geometry);
+	class Window {
+	private:
+		ExwlWindow* window;
+	public:
+		Window() {
+			auto w = exwlCreateWindow();
+			window = w;
+		}
+		Window(char* title) {
+			auto w = exwlCreateWindow();
+			exwlSetWindowTitle(w, title);
+			window = w;
+		}
+		bool setForeground() {
+			return exwlSetForegroundWindow(window);
+		}
+		void setMaximize() {
+			exwlSetWindowMaximize(this->window);
+		}
+		void setMinimize() {
+			exwlSetWindowMinimize(this->window);
+		}
+		void setVisible(bool visible) {
+			exwlSetWindowVisible(this->window, visible);
+		}
+		void setSize(unsigned int width, unsigned int height) {
+			exwlSetWindowSize(this->window, width, height);
+		}
+		void setStyle(unsigned int style) {
+			exwlSetWindowStyle(this->window, style);
+		}
+		void setTitle(char* title) {
+			exwlSetWindowTitle(this->window, title);
+		}
+		bool getWindowGeometry(WindowGeometry* geometry) {
+			return exwlGetWindowGeometry(this->window, geometry);
+		}
 
-	// Callbacks
-	void setCreatedFunc(void(*pfunc)()) {
-		exwlCreatedFunc(this->window,pfunc);
-	}
-	void setRedrawRequestedFunc(void(*pfunc)()) {
-		exwlRedrawRequestedFunc(this->window,pfunc);
-	}
-	void setMovedFunc(void(*pfunc)(uint x,uint y)) {
-		exwlMovedFunc(this->window,pfunc);
-	}
-	void setResizedFunc(void(*pfunc)(uint width,uint height)) {
-		exwlResizedFunc(this->window,pfunc);
-	}
-	void setClosedFunc(void(*pfunc)()) {
-		exwlClosedFunc(this->window,pfunc);
-	}
+		// Callbacks
+		void setCreatedFunc(void(*pfunc)()) {
+			exwlCreatedFunc(this->window, pfunc);
+		}
+		void setRedrawRequestedFunc(void(*pfunc)()) {
+			exwlRedrawRequestedFunc(this->window, pfunc);
+		}
+		void setMovedFunc(void(*pfunc)(uint x, uint y)) {
+			exwlMovedFunc(this->window, pfunc);
+		}
+		void setResizedFunc(void(*pfunc)(uint width, uint height)) {
+			exwlResizedFunc(this->window, pfunc);
+		}
+		void setClosedFunc(void(*pfunc)()) {
+			exwlClosedFunc(this->window, pfunc);
+		}
 
-	// Event handling
-	bool waitEvent() {
-		return exwlWaitEvent(this->window);
-	}
-	bool peekEvent() {
-		return exwlPeekEvent(this->window);
-	}
+		// Event handling
+		bool waitEvent() {
+			return exwlWaitEvent(this->window);
+		}
+		bool peekEvent() {
+			return exwlPeekEvent(this->window);
+		}
 
-	void dispatchWindowMessage() {
-		exwlDispatchWindowMessage(this->window);
-	}
+		void dispatchWindowMessage() {
+			exwlDispatchWindowMessage(this->window);
+		}
 
-	void* getHwnd() {
-		return exwlGetHwndOfWindow(this->window);
-	}
+		void* getHwnd() {
+			return exwlGetHwndOfWindow(this->window);
+		}
 
-	void* getHinstance() {
-		return exwlGetInstanceOfWindow(this->window);
-	}
+		void* getHinstance() {
+			return exwlGetInstanceOfWindow(this->window);
+		}
 
 
-	~Window() {
-		exwlDestroyWindow(this->window);
-	}
-};
+		~Window() {
+			exwlDestroyWindow(this->window);
+		}
+	};
+}
 #endif

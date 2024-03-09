@@ -2,6 +2,7 @@
 #include <iostream>
 
 using namespace std;
+using namespace Exwl;
 
 void closed() {
 	cout << "Window is closed" << endl;
