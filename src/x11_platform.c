@@ -62,7 +62,7 @@ void SetWindowMaximizeForX11(ExwlWindow* window) {
 
 }
 void SetWindowMinimizeForX11(ExwlWindow* window) {
-
+    SetWindowVisibleForX11(window,ExFalse);
 }
 void SetWindowStyleForX11(ExwlWindow* window, WindowStyle style) {
 
@@ -80,10 +80,15 @@ ex_bool WaitEventForX11(ExwlWindow* window) {
     return ExTrue;
 }
 ex_bool PeekEventForX11(ExwlWindow* window) {
-    return WaitEventForX11(window);
+    XPeekEvent(window->x11.display, &window->x11.event);
+    return ExTrue;
 }
 void DispatchWindowMessageForX11(ExwlWindow* window) {
-    if (window->x11.event.type == ClientMessage && window->x11.event.xclient.data.l[0] == window->x11.atoms.wmDeleteMessage)
+    if (window->x11.event.type == Expose )
+        window->functions.pRedrawRequested();
+    else if (window->x11.event.type == ConfigureNotify)
+        window->functions.pResized();
+    else if (window->x11.event.type == ClientMessage && window->x11.event.xclient.data.l[0] == window->x11.atoms.wmDeleteMessage)
         window->functions.pClosed();
 }
 
