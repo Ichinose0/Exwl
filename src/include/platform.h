@@ -18,6 +18,10 @@ typedef struct t_Win32Handle {
 	MSG msg;
 } Win32Handle;
 
+typedef struct t_Win32MenubarHandle {
+	HMENU menu;
+} Win32MenubarHandle;
+
 ExwlWindow* CreateWindowForWin32();
 
 void DefaultWindowGeometryForWin32(WindowGeometry* geometry);
@@ -35,6 +39,9 @@ ex_bool GetWindowGeometryForWin32(ExwlWindow* window, WindowGeometry* geometry);
 ex_bool WaitEventForWin32(ExwlWindow* window);
 ex_bool PeekEventForWin32(ExwlWindow* window);
 void DispatchWindowMessageForWin32(ExwlWindow* window);
+
+ex_bool exwlSetMenubarForWin32(Menubar* menubar, ExwlWindow* window);
+Menubar* CreateMenubarForWin32();
 #endif
 
 #ifdef EXWL_PLATFORM_LINUX
@@ -88,6 +95,9 @@ void DispatchWindowMessageForX11(ExwlWindow* window);
 #define WaitEvent WaitEventForWin32
 #define PeekEvent PeekEventForWin32
 #define DispatchWindowMessage DispatchWindowMessageForWin32
+
+#define SetMenubar exwlSetMenubarForWin32
+#define CreateMenubar CreateMenubarForWin32
 
 #elif defined(__linux__)
 #define _CreateWindow CreateWindowForX11

@@ -14,6 +14,10 @@ typedef uint WindowStyle;
 typedef uint WindowEvent;
 
 typedef struct ExwlWindow ExwlWindow;
+typedef struct Menubar Menubar;
+typedef struct Menu Menu;
+typedef struct MenuItem MenuItem;
+typedef struct RadioMenu RadioMenu;
 
 #define ExFalse 0
 #define ExTrue 1
@@ -88,6 +92,9 @@ extern "C" {
 
 	EXWLAPI void* exwlGetHwndOfWindow(ExwlWindow* window);
 	EXWLAPI void* exwlGetInstanceOfWindow(ExwlWindow* window);
+
+	EXWLAPI ex_bool exwlSetMenubar(Menubar* menubar, ExwlWindow* window);
+	EXWLAPI Menubar* exwlCreateMenubar();
 #ifdef __cplusplus
 }
 #endif

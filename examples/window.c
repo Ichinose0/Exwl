@@ -11,6 +11,9 @@ int main() {
 	exwlSetWindowTitle(window, "A fantastic window");
 	exwlSetWindowVisible(window, ExTrue);
 
+	Menubar* menubar = exwlCreateMenubar();
+	exwlSetMenubar(menubar, window);
+
 	exwlClosedFunc(window, closed);
 
 	ex_bool is_running = ExTrue;

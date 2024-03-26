@@ -194,3 +194,21 @@ void DispatchWindowMessageForWin32(ExwlWindow* window) {
 void _exwlDestroyWindow(ExwlWindow* window) {
 	DestroyWindow(window->win32.hWnd);
 }
+
+ex_bool exwlSetMenubarForWin32(Menubar* menubar, ExwlWindow* window) {
+	SetMenu(window->win32.hWnd, menubar->win32.menu);
+	return ExTrue;
+}
+
+Menubar* CreateMenubarForWin32() {
+	Menubar* menubar = malloc(sizeof(Menubar));
+	menubar->win32.menu = CreateMenu();
+	MENUITEMINFO mii;
+	memset(&mii, 0, sizeof(MENUITEMINFO));
+	mii.cbSize = sizeof(MENUITEMINFO);
+	mii.fMask = MIIM_ID | MIIM_STRING;
+	mii.wID = 0;
+	mii.dwTypeData = TEXT("ƒƒjƒ…[‚P");
+	InsertMenuItem(menubar->win32.menu, 0, FALSE, &mii);
+	return menubar;
+}
