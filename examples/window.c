@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 void closed() {
-	printf("Window is closed¥n");
+	printf("Window is closed\n");
 }
 
 int main() {
@@ -12,6 +12,7 @@ int main() {
 	exwlSetWindowVisible(window, ExTrue);
 
 	Menubar* menubar = exwlCreateMenubar();
+	Menu* menu = exwlInsertMenu(menubar,"File");
 	exwlSetMenubar(menubar, window);
 
 	exwlClosedFunc(window, closed);

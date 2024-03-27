@@ -16,3 +16,7 @@ EXWLAPI ex_bool exwlSetMenubar(Menubar* menubar, ExwlWindow* window) {
 EXWLAPI Menubar* exwlCreateMenubar() {
 	return CreateMenubar();
 }
+
+EXWLAPI Menu* exwlInsertMenu(Menubar* menubar,char* text) {
+	return _InsertMenu(menubar,text);
+}

@@ -34,3 +34,11 @@ struct Menubar {
 	X11MenubarHandle x11;
 #endif
 };
+
+struct Menu {
+#ifdef EXWL_PLATFORM_WIN32
+	Win32MenuHandle win32;
+#elif __linux__
+	X11MenuHandle x11;
+#endif
+};

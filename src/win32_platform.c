@@ -9,6 +9,16 @@
 #include <stdlib.h>
 #include "internal.h"
 #include <stdio.h>
+#include <time.h>
+
+uint genId() {
+	static INITIALIZED = ExFalse;
+	if (!INITIALIZED) {
+		srand((unsigned)time(NULL));
+		INITIALIZED = ExTrue;
+	}
+	return rand() % MAXSHORT;
+}
 
 DWORD ExtractWindowStyle(unsigned int style) {
 	DWORD s = WS_VISIBLE;
@@ -203,12 +213,17 @@ ex_bool exwlSetMenubarForWin32(Menubar* menubar, ExwlWindow* window) {
 Menubar* CreateMenubarForWin32() {
 	Menubar* menubar = malloc(sizeof(Menubar));
 	menubar->win32.menu = CreateMenu();
+	return menubar;
+}
+
+Menu* InsertMenuForWin32(Menubar* menubar,char* text) {
+	Menu* menu = malloc(sizeof(Menu));
+	menu->win32.id = genId();
 	MENUITEMINFO mii;
-	memset(&mii, 0, sizeof(MENUITEMINFO));
 	mii.cbSize = sizeof(MENUITEMINFO);
 	mii.fMask = MIIM_ID | MIIM_STRING;
-	mii.wID = 0;
-	mii.dwTypeData = TEXT("ƒƒjƒ…[‚P");
-	InsertMenuItem(menubar->win32.menu, 0, FALSE, &mii);
-	return menubar;
+	mii.wID = menu->win32.id;
+	mii.dwTypeData = TEXT(text);
+	InsertMenuItem(menubar->win32.menu, menu->win32.id, FALSE, &mii);
+	return menu;
 }
