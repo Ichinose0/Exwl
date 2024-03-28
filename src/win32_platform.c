@@ -227,3 +227,16 @@ Menu* InsertMenuForWin32(Menubar* menubar,char* text) {
 	InsertMenuItem(menubar->win32.menu, menu->win32.id, FALSE, &mii);
 	return menu;
 }
+
+ex_bool DestroyMenubarForWin32(Menubar* menubar) {
+	ex_bool result = DeleteMenu(menubar->win32.menu, 0, 0);
+	free(menubar);
+	return result;
+}
+
+ex_bool DeleteMenuForWin32(Menubar* menubar, Menu* menu) {
+	ex_bool result;
+	result = DeleteMenu(menubar->win32.menu, menu->win32.id, 0);
+	free(menu);
+	return result;
+}

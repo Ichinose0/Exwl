@@ -96,6 +96,9 @@ extern "C" {
 	EXWLAPI ex_bool exwlSetMenubar(Menubar* menubar, ExwlWindow* window);
 	EXWLAPI Menubar* exwlCreateMenubar();
 	EXWLAPI Menu* exwlInsertMenu(Menubar* menubar,char* text);
+
+	EXWLAPI ex_bool exwlDestroyMenubar(Menubar* menubar);
+	EXWLAPI ex_bool exwlDeleteMenu(Menubar* menubar, Menu* menu);
 #ifdef __cplusplus
 }
 #endif

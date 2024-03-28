@@ -17,6 +17,16 @@ EXWLAPI Menubar* exwlCreateMenubar() {
 	return CreateMenubar();
 }
 
+EXWLAPI ex_bool exwlDestroyMenubar(Menubar* menubar) {
+	return DestroyMenubar(menubar);
+}
+
 EXWLAPI Menu* exwlInsertMenu(Menubar* menubar,char* text) {
 	return _InsertMenu(menubar,text);
+}
+
+
+
+EXWLAPI ex_bool exwlDeleteMenu(Menubar* menubar, Menu* menu) {
+	return _DeleteMenu(menubar, menu);
 }

@@ -12,7 +12,8 @@ int main() {
 	exwlSetWindowVisible(window, ExTrue);
 
 	Menubar* menubar = exwlCreateMenubar();
-	Menu* menu = exwlInsertMenu(menubar,"File");
+	Menu* file = exwlInsertMenu(menubar,"File");
+	Menu* edit = exwlInsertMenu(menubar, "Edit");
 	exwlSetMenubar(menubar, window);
 
 	exwlClosedFunc(window, closed);
@@ -26,5 +27,8 @@ int main() {
 			is_running = ExFalse;
 	};
 
+	exwlDeleteMenu(menubar, file);
+	exwlDeleteMenu(menubar, edit);
+	printf("%d",exwlDestroyMenubar(menubar));
 	exwlDestroyWindow(window);
 }
