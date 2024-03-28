@@ -17,6 +17,7 @@ typedef struct ExwlWindow ExwlWindow;
 typedef struct Menubar Menubar;
 typedef struct Menu Menu;
 typedef struct MenuItem MenuItem;
+typedef struct CheckMenu CheckMenu;
 typedef struct RadioMenu RadioMenu;
 
 #define ExFalse 0
@@ -96,6 +97,11 @@ extern "C" {
 	EXWLAPI ex_bool exwlSetMenubar(Menubar* menubar, ExwlWindow* window);
 	EXWLAPI Menubar* exwlCreateMenubar();
 	EXWLAPI Menu* exwlInsertMenu(Menubar* menubar,char* text);
+	EXWLAPI MenuItem* exwlInsertMenuItem(Menu* menu, char* text);
+	EXWLAPI CheckMenu* exwlInsertCheckMenu(Menu* menu, char* text);
+
+	EXWLAPI void exwlSetCheckMenuState(CheckMenu* menu, ex_bool state);
+	EXWLAPI ex_bool exwlGetCheckMenuState(CheckMenu* menu);
 
 	EXWLAPI ex_bool exwlDestroyMenubar(Menubar* menubar);
 	EXWLAPI ex_bool exwlDeleteMenu(Menubar* menubar, Menu* menu);

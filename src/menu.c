@@ -25,6 +25,24 @@ EXWLAPI Menu* exwlInsertMenu(Menubar* menubar,char* text) {
 	return _InsertMenu(menubar,text);
 }
 
+EXWLAPI MenuItem* exwlInsertMenuItem(Menu* menu, char* text) {
+	return _InsertMenuItem(menu, text);
+}
+
+EXWLAPI CheckMenu* exwlInsertCheckMenu(Menu* menu, char* text) {
+	return InsertCheckMenu(menu,text);
+}
+
+
+
+EXWLAPI void exwlSetCheckMenuState(CheckMenu* menu, ex_bool state) {
+	SetCheckMenuState(menu, state);
+}
+
+EXWLAPI ex_bool exwlGetCheckMenuState(CheckMenu* menu) {
+	return GetCheckMenuState(menu);
+}
+
 
 
 EXWLAPI ex_bool exwlDeleteMenu(Menubar* menubar, Menu* menu) {

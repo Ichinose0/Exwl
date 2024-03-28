@@ -13,8 +13,11 @@ int main() {
 
 	Menubar* menubar = exwlCreateMenubar();
 	Menu* file = exwlInsertMenu(menubar,"File");
-	Menu* edit = exwlInsertMenu(menubar, "Edit");
+	MenuItem* exit = exwlInsertMenuItem(file, "Exit");
+	Menu* edit = exwlInsertMenu(menubar, "Help");
+	MenuItem* about = exwlInsertMenuItem(edit, "About");
 	exwlSetMenubar(menubar, window);
+	
 
 	exwlClosedFunc(window, closed);
 
@@ -29,6 +32,6 @@ int main() {
 
 	exwlDeleteMenu(menubar, file);
 	exwlDeleteMenu(menubar, edit);
-	printf("%d",exwlDestroyMenubar(menubar));
+	exwlDestroyMenubar(menubar);
 	exwlDestroyWindow(window);
 }

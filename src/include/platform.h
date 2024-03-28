@@ -24,7 +24,13 @@ typedef struct t_Win32MenubarHandle {
 
 typedef struct t_Win32MenuHandle {
 	uint id;
+	HMENU submenu;
 } Win32MenuHandle;
+
+typedef struct t_Win32MenuItemHandle {
+	uint id;
+	HMENU parent;
+} Win32MenuItemHandle;
 
 ExwlWindow* CreateWindowForWin32();
 
@@ -47,6 +53,12 @@ void DispatchWindowMessageForWin32(ExwlWindow* window);
 ex_bool exwlSetMenubarForWin32(Menubar* menubar, ExwlWindow* window);
 Menubar* CreateMenubarForWin32();
 Menu* InsertMenuForWin32(Menubar* menubar,char* text);
+MenuItem* InsertMenuItemForWin32(Menu* menu, char* text);
+CheckMenu* InsertCheckMenuForWin32(Menu* menu, char* text);
+
+void SetCheckMenuStateForWin32(CheckMenu* menu, ex_bool state);
+ex_bool GetCheckMenuStateForWin32(CheckMenu* menu);
+
 ex_bool DeleteMenuForWin32(Menubar* menubar, Menu* menu);
 ex_bool DestroyMenubarForWin32(Menubar* menubar);
 #endif
@@ -106,6 +118,12 @@ void DispatchWindowMessageForX11(ExwlWindow* window);
 #define SetMenubar exwlSetMenubarForWin32
 #define CreateMenubar CreateMenubarForWin32
 #define _InsertMenu InsertMenuForWin32
+#define _InsertMenuItem InsertMenuItemForWin32
+#define InsertCheckMenu InsertCheckMenuForWin32
+
+#define SetCheckMenuState SetCheckMenuStateForWin32
+#define GetCheckMenuState GetCheckMenuStateForWin32
+
 #define DestroyMenubar DestroyMenubarForWin32
 #define _DeleteMenu DeleteMenuForWin32
 

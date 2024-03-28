@@ -219,13 +219,68 @@ Menubar* CreateMenubarForWin32() {
 Menu* InsertMenuForWin32(Menubar* menubar,char* text) {
 	Menu* menu = malloc(sizeof(Menu));
 	menu->win32.id = genId();
+	menu->win32.submenu = CreatePopupMenu();
+
 	MENUITEMINFO mii;
+	//memset(&mii, 0, sizeof(MENUITEMINFO));
 	mii.cbSize = sizeof(MENUITEMINFO);
-	mii.fMask = MIIM_ID | MIIM_STRING;
+	mii.fMask = MIIM_ID | MIIM_STRING | MIIM_SUBMENU;
 	mii.wID = menu->win32.id;
+	mii.hSubMenu = menu->win32.submenu; //◆サブメニューの追加
 	mii.dwTypeData = TEXT(text);
 	InsertMenuItem(menubar->win32.menu, menu->win32.id, FALSE, &mii);
 	return menu;
+}
+
+MenuItem* InsertMenuItemForWin32(Menu* menu, char* text) {
+	MenuItem* item = malloc(sizeof(MenuItem));
+	item->win32.id = genId();
+	item->win32.parent = menu->win32.submenu;
+	MENUITEMINFO mii;
+	mii.cbSize = sizeof(MENUITEMINFO);
+	mii.fMask = MIIM_ID | MIIM_STRING;
+	mii.wID = item->win32.id;
+	mii.dwTypeData = TEXT(text);
+	InsertMenuItem(menu->win32.submenu, item->win32.id, FALSE, &mii);
+	return item;
+}
+
+CheckMenu* InsertCheckMenuForWin32(Menu* menu, char* text) {
+	CheckMenu* item = malloc(sizeof(CheckMenu));
+	item->win32.id = genId();
+	item->win32.parent = menu->win32.submenu;
+	MENUITEMINFO mii;
+	mii.cbSize = sizeof(MENUITEMINFO);
+	mii.fMask = MIIM_ID | MIIM_STRING | MIIM_STATE;
+	mii.fState = MFS_UNCHECKED;
+	mii.wID = item->win32.id;
+	mii.dwTypeData = TEXT(text);
+	InsertMenuItem(menu->win32.submenu, item->win32.id, FALSE, &mii);
+	return item;
+}
+
+
+
+void SetCheckMenuStateForWin32(CheckMenu* menu, ex_bool state) {
+	MENUITEMINFO mii;
+	mii.cbSize = sizeof(MENUITEMINFO);
+	mii.fMask = MIIM_STATE;
+
+	if (state)
+		mii.fState = MFS_CHECKED;
+	else
+		mii.fState = MFS_UNCHECKED;
+
+	SetMenuItemInfo(menu->win32.parent, menu->win32.id, FALSE, &mii);
+}
+
+ex_bool GetCheckMenuStateForWin32(CheckMenu* menu) {
+	uint state = GetMenuState(menu->win32.parent, menu->win32.id, FALSE);
+	
+	if (state == MFS_CHECKED)
+		return ExTrue;
+	else
+		return ExFalse;
 }
 
 ex_bool DestroyMenubarForWin32(Menubar* menubar) {

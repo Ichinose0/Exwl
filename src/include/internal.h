@@ -42,3 +42,27 @@ struct Menu {
 	X11MenuHandle x11;
 #endif
 };
+
+struct MenuItem {
+#ifdef EXWL_PLATFORM_WIN32
+	Win32MenuItemHandle win32;
+#elif __linux__
+	X11MenuItemHandle x11;
+#endif
+};
+
+struct CheckMenu {
+#ifdef EXWL_PLATFORM_WIN32
+	Win32MenuItemHandle win32;
+#elif __linux__
+	X11MenuItemHandle x11;
+#endif
+};
+
+struct RadioMenu {
+#ifdef EXWL_PLATFORM_WIN32
+	Win32MenuItemHandle win32;
+#elif __linux__
+	X11MenuItemHandle x11;
+#endif
+};
